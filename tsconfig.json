@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "alwaysStrict": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "module": "esnext",
+    "noEmit": true,
+    "target": "esnext"
+  },
+  "include": ["declarations.d.ts", "src/**/*.js"]
+}
