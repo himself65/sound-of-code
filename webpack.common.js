@@ -13,6 +13,16 @@ module.exports = {
     filename: '[name].js'
   },
 
+  resolve: {
+    fallback: {
+      path: require.resolve('path-browserify')
+    }
+  },
+
+  optimization: {
+    minimize: false
+  },
+
   module: {
     rules: [
       {
@@ -24,7 +34,12 @@ module.exports = {
         test: /\.less$/,
         use: [
           'style-loader',
-          MiniCSSExtractPlugin.loader,
+          {
+            loader: MiniCSSExtractPlugin.loader,
+            options: {
+              esModule: false
+            }
+          },
           {
             loader: 'css-loader',
             options: { sourceMap: true }
@@ -32,7 +47,12 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [require('autoprefixer')(), require('cssnano')()],
+              postcssOptions: {
+                plugins: [
+                  ['autoprefixer'],
+                  ['cssnano']
+                ]
+              },
               sourceMap: true
             }
           },
@@ -49,7 +69,10 @@ module.exports = {
     new MiniCSSExtractPlugin({
       filename: '[name].css'
     }),
-    new HtmlWebpackPlugin({ template: './static/index.html' }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: './static/index.html'
+    }),
     new HtmlWebpackPlugin({
       filename: 'sonify/index.html',
       template: './static/index.html'
@@ -66,11 +89,21 @@ module.exports = {
       filename: 'resources/index.html',
       template: './static/index.html'
     }),
-    new CopyWebpackPlugin([
-      {
-        from: '**/*',
-        context: 'static/'
-      }
-    ])
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'static/img',
+          to: 'build/img'
+        },
+        {
+          from: 'static/examples',
+          to: 'build/examples'
+        },
+        {
+          from: 'static/sounds',
+          to: 'build/sounds'
+        }
+      ]
+    })
   ]
 }
