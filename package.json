@@ -3,6 +3,7 @@
   "version": "1.5.0",
   "description": "Sonification of code",
   "scripts": {
+    "start": "npm run dev",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "format": "npm run prettier && npm run lint -- --fix",
@@ -80,7 +81,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "cssnano": "^6.0.1",
-    "eslint": "^6.7.2",
+    "eslint": "^7.32.0",
     "html-webpack-plugin": "^5.5.3",
     "husky": "^8.0.3",
     "jest": "^24.9.0",
