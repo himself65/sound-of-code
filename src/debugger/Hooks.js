@@ -22,7 +22,7 @@ export class Hooks {
     }
 
     const {
-      program: { status }
+      program: { status },
     } = store.getState();
 
     if (status === "stopped") {
@@ -40,9 +40,9 @@ export class Hooks {
   async noopCall(type, info) {
     const {
       loc: {
-        start: { line: index }
+        start: { line: index },
       },
-      settings: { forDepth, whileDepth, silence }
+      settings: { forDepth, whileDepth, silence },
     } = info;
 
     while (this.getStatus() === "paused") {
@@ -54,7 +54,7 @@ export class Hooks {
     }
 
     const {
-      program: { startLocation, skipMode }
+      program: { startLocation, skipMode },
     } = store.getState();
 
     if (!skipMode || index >= startLocation) {
@@ -77,10 +77,10 @@ export class Hooks {
   async coverControl(item, info) {
     const {
       loc: {
-        start: { line: index }
+        start: { line: index },
       },
       settings: { forDepth, whileDepth, silence },
-      type
+      type,
     } = info;
 
     while (this.getStatus() === "paused") {
@@ -92,7 +92,7 @@ export class Hooks {
     }
 
     const {
-      program: { startLocation, skipMode }
+      program: { startLocation, skipMode },
     } = store.getState();
 
     if (!skipMode || index >= startLocation) {
@@ -117,11 +117,11 @@ export class Hooks {
   async dynamicTypeCheck(item, info) {
     const {
       loc: {
-        start: { line: index }
+        start: { line: index },
       },
       settings: { forDepth, whileDepth, silence },
       identity = null,
-      isBinary = false
+      isBinary = false,
     } = info;
 
     while (this.getStatus() === "paused") {
@@ -146,7 +146,7 @@ export class Hooks {
     }
 
     const {
-      program: { startLocation, skipMode, varMap }
+      program: { startLocation, skipMode, varMap },
     } = store.getState();
 
     const isAudible = !skipMode || index >= startLocation;
@@ -158,7 +158,7 @@ export class Hooks {
 
     if (identity) {
       store.dispatch(
-        program.trackType({ dataType: type, identifier: identity })
+        program.trackType({ dataType: type, identifier: identity }),
       );
 
       const prevType = varMap.get(identity) || type;
@@ -167,8 +167,8 @@ export class Hooks {
       if (type !== prevType) {
         store.dispatch(
           consoleActions.addLog(
-            `(${identity} @ ${index}): ${prevType} -> ${type}`
-          )
+            `(${identity} @ ${index}): ${prevType} -> ${type}`,
+          ),
         );
 
         if (isAudible) {
@@ -194,7 +194,7 @@ export class Hooks {
       // Plays datatype sound alone, if not modifying variable
       await Promise.all([
         isBinary && this.sound.play("BinaryExpression"),
-        this.sound.play(type)
+        this.sound.play(type),
       ]);
     }
 

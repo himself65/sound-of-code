@@ -1,6 +1,6 @@
 import { program as programActions } from "../../src/actions";
 import { createStore } from "../../src/store";
-import { describe, test, beforeEach, expect } from 'vitest'
+import { describe, test, beforeEach, expect } from "vitest";
 
 describe("Program Status", () => {
   describe("states", () => {
@@ -25,7 +25,7 @@ describe("Program Status", () => {
 
       expect(program).toMatchObject({
         skipMode: true,
-        startLocation: 2
+        startLocation: 2,
       });
     });
 
@@ -37,7 +37,7 @@ describe("Program Status", () => {
 
       expect(program).toMatchObject({
         skipMode: false,
-        startLocation: -1
+        startLocation: -1,
       });
     });
 
@@ -47,7 +47,7 @@ describe("Program Status", () => {
       const { program } = store.getState();
 
       expect(program).toMatchObject({
-        weaverStatus: "parsing"
+        weaverStatus: "parsing",
       });
     });
 
@@ -58,7 +58,7 @@ describe("Program Status", () => {
       const { program } = store.getState();
 
       expect(program).toMatchObject({
-        weaverStatus: "error"
+        weaverStatus: "error",
       });
     });
 
@@ -69,7 +69,7 @@ describe("Program Status", () => {
       const { program } = store.getState();
 
       expect(program).toMatchObject({
-        weaverStatus: "success"
+        weaverStatus: "success",
       });
     });
 
@@ -82,7 +82,7 @@ describe("Program Status", () => {
 
       expect(program).toMatchObject({
         isExecuting: true,
-        status: "playing"
+        status: "playing",
       });
     });
 
@@ -93,12 +93,12 @@ describe("Program Status", () => {
       store.dispatch(
         programActions.trackType({
           identifier: "foo",
-          dataType: "number"
-        })
+          dataType: "number",
+        }),
       );
 
       const {
-        program: { varMap }
+        program: { varMap },
       } = store.getState();
 
       expect(varMap.get("foo")).toBe("number");
@@ -114,7 +114,7 @@ describe("Program Status", () => {
 
       expect(program).toMatchObject({
         isExecuting: true,
-        status: "paused"
+        status: "paused",
       });
     });
 
@@ -129,7 +129,7 @@ describe("Program Status", () => {
 
       expect(program).toMatchObject({
         isExecuting: true,
-        status: "playing"
+        status: "playing",
       });
     });
 
@@ -145,7 +145,7 @@ describe("Program Status", () => {
         startLocation: 5,
         isExecuting: true,
         skipMode: true,
-        status: "playing"
+        status: "playing",
       });
     });
 
@@ -162,7 +162,7 @@ describe("Program Status", () => {
         startLocation: 5,
         isExecuting: true,
         skipMode: false,
-        status: "playing"
+        status: "playing",
       });
     });
 
@@ -177,7 +177,7 @@ describe("Program Status", () => {
       expect(program).toMatchObject({
         exitStatus: "success",
         isExecuting: false,
-        status: "stopped"
+        status: "stopped",
       });
     });
 
@@ -192,7 +192,7 @@ describe("Program Status", () => {
       expect(program).toMatchObject({
         exitStatus: "abort",
         isExecuting: false,
-        status: "stopped"
+        status: "stopped",
       });
     });
 
@@ -207,7 +207,7 @@ describe("Program Status", () => {
       expect(program).toMatchObject({
         exitStatus: "error",
         isExecuting: false,
-        status: "stopped"
+        status: "stopped",
       });
     });
   });

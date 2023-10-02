@@ -61,7 +61,7 @@ export class SoundManager {
     }
 
     const {
-      sound: { volume, types }
+      sound: { volume, types },
     } = store.getState();
 
     const { volume: typeVolume } = types[type];
@@ -212,15 +212,15 @@ export class SoundManager {
           this.statementTrack.once("stop", resolve);
 
           this.statementTrack.once("loaderror", () =>
-            reject(Error("Could not load sound file"))
+            reject(Error("Could not load sound file")),
           );
           this.statementTrack.once("playerror", () =>
-            reject(Error("Could not play sound file"))
+            reject(Error("Could not play sound file")),
           );
 
           // play the sound type here
           this.statementTrack.play();
-        })
+        }),
     );
   }
 }
@@ -229,13 +229,13 @@ export const createTracks = async () => {
   const [forTrack, whileTrack, statementTrack] = await Promise.all([
     createTrack("ForStatement", true),
     createTrack("WhileStatement", true),
-    createTrack("default", false)
+    createTrack("default", false),
   ]);
 
   return {
     forTrack,
     whileTrack,
-    statementTrack
+    statementTrack,
   };
 };
 
@@ -249,7 +249,7 @@ export const createTrack = async (sound, loop = false) => {
   );
 
   const {
-    sound: { speed: rate, theme, volume }
+    sound: { speed: rate, theme, volume },
   } = store.getState();
 
   const file = soundMap[sound].themes[theme];
@@ -260,7 +260,7 @@ export const createTrack = async (sound, loop = false) => {
     src: [getUrl(`./sounds/${file}`)],
     loop,
     rate,
-    volume: volume / 100
+    volume: volume / 100,
   });
 
   return track;
@@ -272,10 +272,10 @@ export const createTrack = async (sound, loop = false) => {
  */
 export const setMultipleSpeed = (tracklist = []) => {
   const {
-    sound: { speed }
+    sound: { speed },
   } = store.getState();
 
-  tracklist.forEach(track => {
+  tracklist.forEach((track) => {
     if (!track) {
       return;
     }

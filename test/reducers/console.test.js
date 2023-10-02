@@ -1,6 +1,6 @@
 import { console as consoleAction } from "../../src/actions";
 import { createStore } from "../../src/store";
-import { describe, test, beforeEach, expect } from 'vitest'
+import { describe, test, beforeEach, expect } from "vitest";
 
 describe("Console", () => {
   describe("actions", () => {
@@ -8,7 +8,7 @@ describe("Console", () => {
       const actual = consoleAction.addLog("hello");
       const expected = {
         type: "CONSOLE_LOG",
-        log: "hello"
+        log: "hello",
       };
 
       expect(actual).toEqual(expected);
@@ -18,7 +18,7 @@ describe("Console", () => {
       const actual = consoleAction.addLog({ hello: "world" });
       const expected = {
         type: "CONSOLE_LOG",
-        log: `{"hello":"world"}`
+        log: '{"hello":"world"}',
       };
 
       expect(actual).toEqual(expected);
@@ -28,7 +28,7 @@ describe("Console", () => {
       const actual = consoleAction.addLog([1, 2, "three", false]);
       const expected = {
         type: "CONSOLE_LOG",
-        log: `[1,2,"three",false]`
+        log: '[1,2,"three",false]',
       };
 
       expect(actual).toEqual(expected);
@@ -38,7 +38,7 @@ describe("Console", () => {
       const actual = consoleAction.addLog("hello", "world");
       const expected = {
         type: "CONSOLE_LOG",
-        log: "hello world"
+        log: "hello world",
       };
 
       expect(actual).toEqual(expected);
@@ -47,11 +47,11 @@ describe("Console", () => {
     test("joins multiple objects in a single log", () => {
       const actual = consoleAction.addLog(
         { hello: "world" },
-        { somebody: "once told me" }
+        { somebody: "once told me" },
       );
       const expected = {
         type: "CONSOLE_LOG",
-        log: `{"hello":"world"} {"somebody":"once told me"}`
+        log: '{"hello":"world"} {"somebody":"once told me"}',
       };
 
       expect(actual).toEqual(expected);

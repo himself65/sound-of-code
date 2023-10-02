@@ -4,7 +4,7 @@
  */
 export const addLog = (...items) => {
   const log = items
-    .map(item => {
+    .map((item) => {
       // istanbul ignore next since babel modifies "typeof"
       const type = typeof item;
 
@@ -20,7 +20,7 @@ export const addLog = (...items) => {
 
   return {
     type: "CONSOLE_LOG",
-    log
+    log,
   };
 };
 

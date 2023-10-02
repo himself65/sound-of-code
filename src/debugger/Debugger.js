@@ -69,7 +69,7 @@ export class Debugger {
         "console",
         "window",
         "__debugger",
-        transformedCode
+        transformedCode,
       );
       /* eslint-enable no-new-func */
 
@@ -80,7 +80,7 @@ export class Debugger {
         .then(() => {
           hooks.onFinish();
         })
-        .catch(err => {
+        .catch((err) => {
           hooks.onError(err);
         });
     } catch (e) {
@@ -88,8 +88,8 @@ export class Debugger {
       store.dispatch(program.error());
       store.dispatch(
         consoleActions.addLog(
-          "[Error] syntax not supported here. Please report this issue."
-        )
+          "[Error] syntax not supported here. Please report this issue.",
+        ),
       );
       store.dispatch(consoleActions.addLog(e.message));
       console.error(e);

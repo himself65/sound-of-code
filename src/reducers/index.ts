@@ -22,5 +22,5 @@ type AppReducer = Redux.Reducer<AppState>
 export const app: AppReducer = Redux.combineReducers({
   console: ConsoleReducer.console,
   program: ProgramReducer.program,
-  sound: SoundReducer.sound
+  sound: SoundReducer.sound,
 });
