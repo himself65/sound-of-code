@@ -1,5 +1,6 @@
 import { console as consoleAction } from "../../src/actions";
 import { createStore } from "../../src/store";
+import { describe, test, beforeEach, expect } from 'vitest'
 
 describe("Console", () => {
   describe("actions", () => {

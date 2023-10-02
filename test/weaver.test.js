@@ -1,6 +1,6 @@
-import { readFile } from "fs";
-import { join } from "path";
-import { promisify } from "util";
+import { readFile } from "node:fs";
+import { join } from "node:path";
+import { promisify } from "node:util";
 
 import { alterProgram } from "../src/debugger/weaver";
 
