@@ -15,7 +15,7 @@ export const setVolume = (volume) => ({ type: "SOUND_SET_VOLUME", volume });
 
 /**
  * Set the volume for a specific datatype
- * @param {DataType | StructureType | DebugType} datatype
+ * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} datatype
  * @param {number} volume
  */
 export const setTypeVolume = (datatype, volume) => ({

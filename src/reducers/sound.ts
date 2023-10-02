@@ -1,24 +1,23 @@
-/**
- * @typedef {object} DistinctSound
- * @property {number} volume
- */
+import type { DataTypes, DebugTypes, StructureTypes } from "../type";
+import { AnyAction } from "redux";
 
-/**
- * @typedef {DataTypes<DistinctSound> | StructureTypes<DistinctSound> | DebugTypes<DistinctSound>} SoundTypeState
- */
+export type DistinctSound = {
+  volume: number;
+};
 
-/**
- * @typedef {object} SoundState
- * @property {number} speed
- * @property {'default' | 'second'} theme
- * @property {number} volume
- * @property {SoundTypeState} types
- */
+export type SoundTypeState =
+  | DataTypes<DistinctSound>
+  | StructureTypes<DistinctSound>
+  | DebugTypes<DistinctSound>;
 
-/**
- * @type {SoundTypeState}
- */
-const defaultSoundTypeState = {
+export type SoundState = {
+  speed: number;
+  theme: "default" | "second";
+  volume: number;
+  types: SoundTypeState;
+};
+
+const defaultSoundTypeState: SoundTypeState = {
   array: { volume: 100 },
   boolean: { volume: 100 },
   function: { volume: 100 },
@@ -46,21 +45,17 @@ const defaultSoundTypeState = {
   TypeChange: { volume: 100 },
 };
 
-/** @type {SoundState} */
-const defaultSoundState = {
+const defaultSoundState: SoundState = {
   speed: 1,
   theme: "default",
   volume: 100,
   types: defaultSoundTypeState,
 };
 
-/**
- * SoundState reducer
- * @param {Readonly<SoundState>} state
- * @param {any} action
- * @returns {Readonly<SoundState>}
- */
-export const sound = (state = defaultSoundState, action) => {
+export const sound = (
+  state: SoundState = defaultSoundState,
+  action: AnyAction,
+): SoundState => {
   switch (action.type) {
     case "SOUND_SET_SPEED":
       return {
