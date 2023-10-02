@@ -1,6 +1,13 @@
 import type { AnyAction } from "redux";
 
-export type DataType = "number" | "string" | "boolean" | "array" | "object" | "null" | "undefined";
+export type DataType =
+  | "number"
+  | "string"
+  | "boolean"
+  | "array"
+  | "object"
+  | "null"
+  | "undefined";
 
 export type ProgramState = {
   startLocation: number;
@@ -10,7 +17,7 @@ export type ProgramState = {
   status: "idle" | "stopped" | "playing" | "paused";
   varMap: ReadonlyMap<string, DataType> | null;
   weaverStatus: "parsing" | "success" | "error" | null;
-}
+};
 
 const defaultProgramState: ProgramState = {
   startLocation: -1,
@@ -22,7 +29,10 @@ const defaultProgramState: ProgramState = {
   weaverStatus: null,
 };
 
-export const program = (state: ProgramState = defaultProgramState, action: AnyAction): ProgramState => {
+export const program = (
+  state: ProgramState = defaultProgramState,
+  action: AnyAction,
+): ProgramState => {
   switch (action.type) {
     case "PROGRAM_SET_START_POINT":
       return {

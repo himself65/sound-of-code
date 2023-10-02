@@ -1,21 +1,21 @@
-import type { DataTypes, DebugTypes, StructureTypes } from '../type'
-import { AnyAction } from 'redux'
+import type { DataTypes, DebugTypes, StructureTypes } from "../type";
+import { AnyAction } from "redux";
 
 export type DistinctSound = {
-  volume: number
-}
+  volume: number;
+};
 
 export type SoundTypeState =
-  DataTypes<DistinctSound>
+  | DataTypes<DistinctSound>
   | StructureTypes<DistinctSound>
-  | DebugTypes<DistinctSound>
+  | DebugTypes<DistinctSound>;
 
 export type SoundState = {
-  speed: number
-  theme: 'default' | 'second'
-  volume: number
-  types: SoundTypeState
-}
+  speed: number;
+  theme: "default" | "second";
+  volume: number;
+  types: SoundTypeState;
+};
 
 const defaultSoundTypeState: SoundTypeState = {
   array: { volume: 100 },
@@ -42,40 +42,43 @@ const defaultSoundTypeState: SoundTypeState = {
   default: { volume: 100 },
   Ending: { volume: 100 },
   RuntimeError: { volume: 100 },
-  TypeChange: { volume: 100 }
-}
+  TypeChange: { volume: 100 },
+};
 
 const defaultSoundState: SoundState = {
   speed: 1,
-  theme: 'default',
+  theme: "default",
   volume: 100,
-  types: defaultSoundTypeState
-}
+  types: defaultSoundTypeState,
+};
 
-export const sound = (state: SoundState = defaultSoundState, action: AnyAction): SoundState => {
+export const sound = (
+  state: SoundState = defaultSoundState,
+  action: AnyAction,
+): SoundState => {
   switch (action.type) {
-    case 'SOUND_SET_SPEED':
+    case "SOUND_SET_SPEED":
       return {
         ...state,
-        speed: action.speed
-      }
+        speed: action.speed,
+      };
 
-    case 'SOUND_SET_THEME':
+    case "SOUND_SET_THEME":
       return {
         ...state,
-        theme: action.theme
-      }
+        theme: action.theme,
+      };
 
-    case 'SOUND_SET_VOLUME':
+    case "SOUND_SET_VOLUME":
       return {
         ...state,
-        volume: action.volume
-      }
+        volume: action.volume,
+      };
 
     default:
-      return { ...state, types: soundTypes(state.types, action) }
+      return { ...state, types: soundTypes(state.types, action) };
   }
-}
+};
 
 /**
  *
@@ -85,13 +88,13 @@ export const sound = (state: SoundState = defaultSoundState, action: AnyAction):
  */
 const soundTypes = (state = defaultSoundTypeState, action) => {
   switch (action.type) {
-    case 'SOUND_SET_DISTINCT_VOLUME':
+    case "SOUND_SET_DISTINCT_VOLUME":
       return {
         ...state,
-        [action.datatype]: { volume: action.volume }
-      }
+        [action.datatype]: { volume: action.volume },
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
