@@ -32,7 +32,9 @@ export const alterProgram = async (code, settings) => {
   // @ts-ignore
   const { body } = parse(code, { locations: true, sourceType: "script" });
 
-  const modifiedCode = body.map(node => modifyStatement(node)).join(exitPoint);
+  const modifiedCode = body
+    .map((node) => modifyStatement(node))
+    .join(exitPoint);
 
   output = `'use strict'\nasync function run () {\n${modifiedCode}\n}`;
 
@@ -49,7 +51,7 @@ export const alterProgram = async (code, settings) => {
     }\n\nreturn run()`;
   } catch (error) {
     throw Error(
-      `[Error] syntax not supported here. Please report this issue.\n${error.message}`
+      `[Error] syntax not supported here. Please report this issue.\n${error.message}`,
     );
   }
 };
@@ -65,7 +67,7 @@ export const alterProgram = async (code, settings) => {
 export const defaultSettings = {
   forDepth: 0,
   whileDepth: 0,
-  silence: false
+  silence: false,
 };
 
 export const exitPoint = `\n\nif (__debugger.getStatus() === 'stopped') {
@@ -178,7 +180,7 @@ export const modifyStatement = (node, settings = defaultSettings) => {
       return `undefined /* Type not supported: ${type}\n ${JSON.stringify(
         node,
         null,
-        2
+        2,
       )}*/`;
   }
 };
@@ -191,7 +193,7 @@ export const modifyStatement = (node, settings = defaultSettings) => {
 export const modArrayExpression = (node, settings) => {
   const { elements } = node;
   const members = elements
-    .map(member => `await (${modifyStatement(member, settings)})`)
+    .map((member) => `await (${modifyStatement(member, settings)})`)
     .join(", ");
 
   return `[${members}]`;
@@ -206,7 +208,7 @@ export const modArrowFunctionExpression = (node, settings) => {
   const { params, body } = node;
 
   const paramList = params
-    .map(param => modifyStatement(param, settings))
+    .map((param) => modifyStatement(param, settings))
     .join(", ");
   const functionBody = modifyStatement(body, settings);
 
@@ -215,7 +217,7 @@ export const modArrowFunctionExpression = (node, settings) => {
   } else {
     const pseudoReturn = modReturnStatement(
       { loc: body.loc, argument: body },
-      settings
+      settings,
     );
     return `async (${paramList}) => {\n${pseudoReturn}\n}`;
   }
@@ -238,7 +240,7 @@ export const modAssignmentExpression = (node, settings) => {
 
   const assign = modifyStatement(right, {
     ...settings,
-    silence: settings.silence || !isFunction
+    silence: settings.silence || !isFunction,
   });
 
   return `${leftId} ${operator} await __debugger.dynamicTypeCheck(await (${assign}), ${JSON.stringify(
@@ -246,8 +248,8 @@ export const modAssignmentExpression = (node, settings) => {
       loc,
       settings,
       identity: resolveIdentity(left),
-      isBinary
-    }
+      isBinary,
+    },
   )})`;
 };
 
@@ -263,11 +265,11 @@ export const modBinaryExpression = (node, settings) => {
 
   const leftOp = `await __debugger.dynamicTypeCheck(await (${modifyStatement(
     left,
-    opSettings
+    opSettings,
   )}), ${JSON.stringify({ loc, settings: opSettings })})`;
   const rightOp = `await __debugger.dynamicTypeCheck(await (${modifyStatement(
     right,
-    opSettings
+    opSettings,
   )}), ${JSON.stringify({ loc, settings: opSettings })})`;
 
   const result = `((${leftOp}) ${operator} (${rightOp}))`;
@@ -275,8 +277,8 @@ export const modBinaryExpression = (node, settings) => {
   return `await __debugger.dynamicTypeCheck(await (${result}), ${JSON.stringify(
     {
       loc,
-      settings
-    }
+      settings,
+    },
   )})`;
 };
 
@@ -288,7 +290,7 @@ export const modBinaryExpression = (node, settings) => {
 export const modBlockStatement = (node, settings) => {
   const { body } = node;
   const statements = body
-    .map(statement => modifyStatement(statement, settings))
+    .map((statement) => modifyStatement(statement, settings))
     .join(exitPoint);
 
   return `{\n${exitPoint}${statements}${exitPoint}\n}`;
@@ -304,7 +306,7 @@ export const modBreakStatement = (node, settings) => {
 
   return `await __debugger.noopCall('${type}', ${JSON.stringify({
     loc,
-    settings
+    settings,
   })})\nbreak`;
 };
 
@@ -319,16 +321,16 @@ export const modCallExpression = (node, settings) => {
   const callSettings = { ...settings, silence: true };
   const calledFunction = modifyStatement(callee, callSettings);
   const argsList = args
-    .map(arg => modifyStatement(arg, callSettings))
+    .map((arg) => modifyStatement(arg, callSettings))
     .join(", ");
 
   const preCall = `await __debugger.noopCall('default', ${JSON.stringify({
     loc,
-    settings
+    settings,
   })})`;
 
   return `(${preCall}.then(async () => { return __debugger.dynamicTypeCheck(await (${calledFunction}(${argsList})), ${JSON.stringify(
-    { loc, settings }
+    { loc, settings },
   )}) }))`;
 };
 
@@ -347,7 +349,7 @@ export const modConditionalExpression = (node, settings) => {
   return `(await __debugger.coverControl(await (${check}), ${JSON.stringify({
     loc,
     settings,
-    type
+    type,
   })})) ? ${ifBody} : ${elseBody}`;
 };
 
@@ -361,7 +363,7 @@ export const modContinueStatement = (node, settings) => {
 
   return `await __debugger.noopCall('${type}', ${JSON.stringify({
     loc,
-    settings
+    settings,
   })})\ncontinue`;
 };
 
@@ -375,12 +377,12 @@ export const modDoWhileStatement = (node, settings) => {
 
   const doWhileBody = modifyStatement(body, {
     ...settings,
-    whileDepth: settings.whileDepth + 1
+    whileDepth: settings.whileDepth + 1,
   });
   const check = modifyStatement(test, { ...settings, silence: true });
 
   return `do\n${doWhileBody}\nwhile (await __debugger.coverControl(await (${check}), ${JSON.stringify(
-    { loc, settings, type }
+    { loc, settings, type },
   )}))`;
 };
 
@@ -413,11 +415,11 @@ export const modForStatement = (node, settings) => {
   // Increment forDepth
   const forBody = modifyStatement(body, {
     ...settings,
-    forDepth: settings.forDepth + 1
+    forDepth: settings.forDepth + 1,
   });
 
   return `for (${initial}; await __debugger.coverControl(await (${check}), ${JSON.stringify(
-    { loc, settings, type }
+    { loc, settings, type },
   )}); await (${change}))\n${forBody}`;
 };
 
@@ -433,7 +435,7 @@ export const modFunctionDeclaration = (node, settings) => {
 
   return `await __debugger.noopCall('function', ${JSON.stringify({
     loc,
-    settings
+    settings,
   })})\n${modifiedFunction}`;
 };
 
@@ -447,7 +449,7 @@ export const modFunctionExpression = (node, settings) => {
 
   const identifier = modifyStatement(id, settings);
   const parameters = params
-    .map(param => modifyStatement(param, settings))
+    .map((param) => modifyStatement(param, settings))
     .join(", ");
   const funcBody = modifyStatement(body, settings);
 
@@ -482,7 +484,7 @@ export const modIfStatement = (node, settings) => {
   return `if (await __debugger.coverControl(await (${check}), ${JSON.stringify({
     loc,
     settings,
-    type
+    type,
   })}))\n${ifBody}\nelse ${elseBody}`;
 };
 
@@ -530,7 +532,9 @@ export const modObjectExpression = (node, settings) => {
   const { properties } = node;
 
   const values = properties
-    .map(property => modifyStatement(property, { ...settings, silence: true }))
+    .map((property) =>
+      modifyStatement(property, { ...settings, silence: true }),
+    )
     .join(", ");
 
   return `{\n${values}\n}`;
@@ -563,7 +567,7 @@ export const modReturnStatement = (node, settings) => {
   const resultValue = modifyStatement(argument, { ...settings, silence: true });
 
   return `return await __debugger.dynamicTypeCheck(await (${resultValue}), ${JSON.stringify(
-    { loc, settings }
+    { loc, settings },
   )})`;
 };
 
@@ -577,14 +581,14 @@ export const modSwitchCase = (node, settings) => {
 
   const check = modifyStatement(test, { ...settings, silence: true });
   const caseBody = consequent
-    .map(statement => modifyStatement(statement, settings))
+    .map((statement) => modifyStatement(statement, settings))
     .join(exitPoint);
 
   return test !== null
     ? `case (await (__debugger.coverControl(await (${check}), ${JSON.stringify({
         loc,
         settings,
-        type
+        type,
       })}))):\n${caseBody}`
     : `default:\n${caseBody}`;
 };
@@ -599,15 +603,15 @@ export const modSwitchStatement = (node, settings) => {
 
   const check = modifyStatement(discriminant, { ...settings, silence: true });
   const caseBodies = cases
-    .map(situation => modifyStatement(situation, settings))
+    .map((situation) => modifyStatement(situation, settings))
     .join("\n");
 
   return `switch (await __debugger.coverControl(await (${check}), ${JSON.stringify(
     {
       loc,
       settings,
-      type
-    }
+      type,
+    },
   )})) {\n${caseBodies}\n}`;
 };
 
@@ -624,8 +628,8 @@ export const modThrowStatement = (node, settings) => {
   return `throw await __debugger.dynamicTypeCheck(await (${arg}), ${JSON.stringify(
     {
       loc,
-      settings
-    }
+      settings,
+    },
   )})`;
 };
 
@@ -644,7 +648,7 @@ export const modUpdateExpression = (node, settings) => {
     : `${identity} ${operator}`;
 
   return `await __debugger.dynamicTypeCheck(await (${statement}), ${JSON.stringify(
-    { loc, settings, isBinary: true }
+    { loc, settings, isBinary: true },
   )})`;
 };
 
@@ -657,7 +661,7 @@ export const modVariableDeclaration = (node, settings) => {
   const { kind, declarations } = node;
 
   const variableList = declarations
-    .map(declared => modifyStatement(declared, settings))
+    .map((declared) => modifyStatement(declared, settings))
     .join(", ");
 
   return `${kind} ${variableList}`;
@@ -684,12 +688,12 @@ export const modVariableDeclarator = (node, settings) => {
 
     value = modifyStatement(init, {
       ...settings,
-      silence: settings.silence || !isFunction
+      silence: settings.silence || !isFunction,
     });
   }
 
   return `${identifier} = await __debugger.dynamicTypeCheck(await (${value}), ${JSON.stringify(
-    { loc, settings, identity: resolveIdentity(id), isBinary }
+    { loc, settings, identity: resolveIdentity(id), isBinary },
   )})`;
 };
 
@@ -704,14 +708,14 @@ export const modWhileStatement = (node, settings) => {
   const check = modifyStatement(test, { ...settings, silence: true });
   const whileBody = modifyStatement(body, {
     ...settings,
-    whileDepth: settings.whileDepth + 1
+    whileDepth: settings.whileDepth + 1,
   });
 
   return `while (await __debugger.coverControl(await (${check}), ${JSON.stringify(
     {
       loc,
       settings,
-      type
-    }
+      type,
+    },
   )}))\n${whileBody}`;
 };

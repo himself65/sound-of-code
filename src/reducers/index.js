@@ -25,5 +25,5 @@ export { sound } from "./sound";
 export const app = Redux.combineReducers({
   console: ConsoleReducer.console,
   program: ProgramReducer.program,
-  sound: SoundReducer.sound
+  sound: SoundReducer.sound,
 });

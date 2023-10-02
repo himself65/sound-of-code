@@ -1,6 +1,6 @@
 import { sound as soundAction } from "../../src/actions";
 import { createStore } from "../../src/store";
-import { describe, test, beforeEach, expect } from 'vitest'
+import { describe, test, beforeEach, expect } from "vitest";
 
 describe("Sound", () => {
   describe("states", () => {

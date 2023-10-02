@@ -3,7 +3,7 @@
  * @param {any} node
  * @returns {string}
  */
-export const resolveIdentity = node => {
+export const resolveIdentity = (node) => {
   if (!node) {
     return "";
   }
@@ -38,7 +38,7 @@ export const resolveIdentity = node => {
  * @param {any} node
  * @returns {string}
  */
-export const resBinaryExpression = node => {
+export const resBinaryExpression = (node) => {
   const { left, operator, right } = node;
 
   const leftId = resolveIdentity(left);
@@ -62,26 +62,26 @@ export const resBinaryExpression = node => {
  * @param {any} node
  * @returns {string}
  */
-export const resIdentifier = node => node.name;
+export const resIdentifier = (node) => node.name;
 
 /**
  * @param {any} node
  * @returns {string}
  */
-export const resLiteral = node => node.raw;
+export const resLiteral = (node) => node.raw;
 
 /**
  * An alias for `resBinaryExpression` since it functions the same way
  * @param {any} node
  * @returns {string}
  */
-export const resLogicalExpression = node => resBinaryExpression(node);
+export const resLogicalExpression = (node) => resBinaryExpression(node);
 
 /**
  * @param {any} node
  * @returns {string}
  */
-export const resMemberExpression = node => {
+export const resMemberExpression = (node) => {
   const { object, property, computed } = node;
 
   const objectId = resolveIdentity(object);
@@ -94,7 +94,7 @@ export const resMemberExpression = node => {
  * @param {any} node
  * @returns {string}
  */
-export const resUpdateExpression = node => {
+export const resUpdateExpression = (node) => {
   const { operator, prefix, argument } = node;
 
   const id = resolveIdentity(argument);

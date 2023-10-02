@@ -2,9 +2,9 @@
  * Sets a start location. Also starts the program in "skip" mode.
  * @param {number} lineNumber
  */
-export const setStartpoint = lineNumber => ({
+export const setStartpoint = (lineNumber) => ({
   type: "PROGRAM_SET_START_POINT",
-  lineNumber
+  lineNumber,
 });
 
 /**
@@ -51,10 +51,10 @@ export const resume = () => ({ type: "PROGRAM_RESUME" });
  * Tracks a variable and its datatype
  * @param {{ dataType: DataType, identifier: string }} info
  */
-export const trackType = info => ({
+export const trackType = (info) => ({
   type: "PROGRAM_TRACK",
   dataType: info.dataType,
-  identifier: info.identifier
+  identifier: info.identifier,
 });
 
 /**
