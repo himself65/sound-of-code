@@ -2,11 +2,13 @@ import React, { useRef, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { clear } from '../actions/console'
+import type { AppState } from '../reducers'
+import type { ConsoleState } from '../reducers/console'
 
 export function Console () {
   const logRef = useRef(null)
   const dispatch = useDispatch()
-  const log = useSelector(state => state.console)
+  const log = useSelector<AppState, ConsoleState>(state => state.console)
 
   const clearConsole = useCallback(() => dispatch(clear()), [dispatch])
 

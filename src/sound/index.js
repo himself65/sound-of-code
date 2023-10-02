@@ -1,2 +1,2 @@
-export { SoundManager } from './SoundManager'
-export { soundMap } from './soundmap'
+export { SoundManager } from "./SoundManager";
+export { soundMap } from "./soundmap";

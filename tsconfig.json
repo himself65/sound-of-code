@@ -5,10 +5,10 @@
     "checkJs": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "module": "esnext",
     "noEmit": true,
     "target": "esnext"
   },
-  "include": ["declarations.d.ts", "src/**/*.js"]
+  "include": ["./src"]
 }

@@ -1,270 +1,270 @@
-import { sound as soundActions } from '../actions'
-import { soundMap } from './soundmap'
-import { store } from '../store'
-import { getUrl } from '../utils'
+import { sound as soundActions } from "../actions";
+import { soundMap } from "./soundmap";
+import { store } from "../store";
+import { getUrl } from "../utils";
 
 /** Manages Howler sound instances */
 export class SoundManager {
-  constructor () {
-    this.forDepth = 0
-    this.whileDepth = 0
+  constructor() {
+    this.forDepth = 0;
+    this.whileDepth = 0;
 
-    /** @type {DataType | StructureType | DebugType} */
-    this.currentTrack = 'default'
+    /** @type {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} */
+    this.currentTrack = "default";
 
-    this.ready = false
+    this.ready = false;
   }
 
   /** Initializes the sound tracks */
-  async init () {
+  async init() {
     if (this.ready) {
-      return
+      return;
     }
 
-    const { forTrack, whileTrack, statementTrack } = await createTracks()
+    const { forTrack, whileTrack, statementTrack } = await createTracks();
 
-    this.forTrack = forTrack
-    this.whileTrack = whileTrack
-    this.statementTrack = statementTrack
+    this.forTrack = forTrack;
+    this.whileTrack = whileTrack;
+    this.statementTrack = statementTrack;
 
-    this.ready = true
+    this.ready = true;
   }
 
   /**
    * Changes the sound theme
-   * @param {Theme} theme
+   * @param {import("../type").Theme} theme
    */
-  async setTheme (theme) {
-    store.dispatch(soundActions.setTheme(theme))
-    this.stop()
+  async setTheme(theme) {
+    store.dispatch(soundActions.setTheme(theme));
+    this.stop();
 
-    const { forTrack, whileTrack } = await createTracks()
+    const { forTrack, whileTrack } = await createTracks();
 
-    this.forTrack = forTrack
-    this.whileTrack = whileTrack
+    this.forTrack = forTrack;
+    this.whileTrack = whileTrack;
 
-    this.resumeLoops()
+    this.resumeLoops();
   }
 
   /**
    * @param {Howl} track
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    * @param {boolean?} checkCurrent
    */
-  adjustTrackVolume (track, type, checkCurrent = false) {
+  adjustTrackVolume(track, type, checkCurrent = false) {
     if (!track) {
-      return
+      return;
     } else if (checkCurrent) {
       if (this.currentTrack !== type) {
-        return
+        return;
       }
     }
 
     const {
-      sound: { volume, types }
-    } = store.getState()
+      sound: { volume, types },
+    } = store.getState();
 
-    const { volume: typeVolume } = types[type]
+    const { volume: typeVolume } = types[type];
 
-    const calculatedVolume = (volume / 100) * (typeVolume / 100)
+    const calculatedVolume = (volume / 100) * (typeVolume / 100);
 
-    track.volume(calculatedVolume)
+    track.volume(calculatedVolume);
   }
 
   /**
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    * @param {number} volume
    */
-  setTypeVolume (type, volume) {
-    store.dispatch(soundActions.setTypeVolume(type, volume))
+  setTypeVolume(type, volume) {
+    store.dispatch(soundActions.setTypeVolume(type, volume));
 
-    this.adjustTrackVolume(this.forTrack, 'ForStatement')
-    this.adjustTrackVolume(this.statementTrack, type, true)
-    this.adjustTrackVolume(this.whileTrack, 'WhileStatement')
+    this.adjustTrackVolume(this.forTrack, "ForStatement");
+    this.adjustTrackVolume(this.statementTrack, type, true);
+    this.adjustTrackVolume(this.whileTrack, "WhileStatement");
   }
 
   /**
    * Changes the playback volume
    * @param {number} volume
    */
-  setVolume (volume) {
-    store.dispatch(soundActions.setVolume(volume))
+  setVolume(volume) {
+    store.dispatch(soundActions.setVolume(volume));
 
-    this.adjustTrackVolume(this.forTrack, 'ForStatement')
-    this.adjustTrackVolume(this.statementTrack, this.currentTrack)
-    this.adjustTrackVolume(this.whileTrack, 'WhileStatement')
+    this.adjustTrackVolume(this.forTrack, "ForStatement");
+    this.adjustTrackVolume(this.statementTrack, this.currentTrack);
+    this.adjustTrackVolume(this.whileTrack, "WhileStatement");
   }
 
   /**
    * Changes the playback speed
    * @param {number} speed
    */
-  setSpeed (speed) {
-    store.dispatch(soundActions.setSpeed(speed))
+  setSpeed(speed) {
+    store.dispatch(soundActions.setSpeed(speed));
 
-    setMultipleSpeed([this.forTrack, this.whileTrack, this.statementTrack])
+    setMultipleSpeed([this.forTrack, this.whileTrack, this.statementTrack]);
   }
 
   /**
    * @param {number} currentDepth any non-negative integer
    */
-  setForDepth (currentDepth) {
+  setForDepth(currentDepth) {
     if (!this.ready || currentDepth < 0 || this.forDepth === currentDepth) {
-      return
+      return;
     }
 
     if (this.forDepth > 0) {
       if (currentDepth > 0) {
-        return
+        return;
       } else {
         // Deactivate the for track
-        this.forTrack.stop()
+        this.forTrack.stop();
       }
     } else {
       if (currentDepth > 0) {
         // Activate the for track
-        this.forTrack.play()
+        this.forTrack.play();
       }
     }
 
-    this.forDepth = currentDepth
+    this.forDepth = currentDepth;
   }
 
   /**
    * @param {number} currentDepth any non-negative integer
    */
-  setWhileDepth (currentDepth) {
+  setWhileDepth(currentDepth) {
     if (!this.ready || currentDepth < 0 || this.whileDepth === currentDepth) {
-      return
+      return;
     }
 
     if (this.whileDepth > 0) {
       if (currentDepth > 0) {
-        return
+        return;
       } else {
         // Deactivate the while track
-        this.whileTrack.stop()
+        this.whileTrack.stop();
       }
     } else {
       if (currentDepth > 0) {
         // Activate the while track
-        this.whileTrack.play()
+        this.whileTrack.play();
       }
     }
 
-    this.whileDepth = currentDepth
+    this.whileDepth = currentDepth;
   }
 
   /**
    * Set the statement track to a new type
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    */
-  async setValueType (type) {
-    const calledType = soundMap[type] ? type : 'default'
+  async setValueType(type) {
+    const calledType = soundMap[type] ? type : "default";
 
-    this.currentTrack = calledType
+    this.currentTrack = calledType;
 
-    this.statementTrack = await createTrack(calledType)
-    this.adjustTrackVolume(this.statementTrack, calledType)
+    this.statementTrack = await createTrack(calledType);
+    this.adjustTrackVolume(this.statementTrack, calledType);
   }
 
   /** Pauses all sound tracks */
-  pause () {
-    this.forTrack && this.forTrack.pause()
-    this.whileTrack && this.whileTrack.pause()
-    this.statementTrack && this.statementTrack.pause()
+  pause() {
+    this.forTrack && this.forTrack.pause();
+    this.whileTrack && this.whileTrack.pause();
+    this.statementTrack && this.statementTrack.pause();
   }
 
   /** Stops all sound tracks */
-  stop () {
-    this.forTrack && this.forTrack.stop()
-    this.whileTrack && this.whileTrack.stop()
-    this.statementTrack && this.statementTrack.stop()
+  stop() {
+    this.forTrack && this.forTrack.stop();
+    this.whileTrack && this.whileTrack.stop();
+    this.statementTrack && this.statementTrack.stop();
   }
 
   /** Resumes all loops */
-  resumeLoops () {
+  resumeLoops() {
     if (this.whileDepth > 0 && !this.whileTrack.playing()) {
-      this.whileTrack.play()
+      this.whileTrack.play();
     }
 
     if (this.forDepth > 0 && !this.forTrack.playing()) {
-      this.forTrack.play()
+      this.forTrack.play();
     }
   }
 
   /**
    * Play a sound for a statement
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    */
-  play (type) {
-    this.resumeLoops()
+  play(type) {
+    this.resumeLoops();
 
     if (this.statementTrack) {
-      this.statementTrack.stop()
+      this.statementTrack.stop();
     }
 
     return this.setValueType(type).then(
       () =>
         new Promise((resolve, reject) => {
-          this.statementTrack.once('end', resolve)
-          this.statementTrack.once('pause', resolve)
-          this.statementTrack.once('stop', resolve)
+          this.statementTrack.once("end", resolve);
+          this.statementTrack.once("pause", resolve);
+          this.statementTrack.once("stop", resolve);
 
-          this.statementTrack.once('loaderror', () =>
-            reject(Error('Could not load sound file'))
-          )
-          this.statementTrack.once('playerror', () =>
-            reject(Error('Could not play sound file'))
-          )
+          this.statementTrack.once("loaderror", () =>
+            reject(Error("Could not load sound file")),
+          );
+          this.statementTrack.once("playerror", () =>
+            reject(Error("Could not play sound file")),
+          );
 
           // play the sound type here
-          this.statementTrack.play()
-        })
-    )
+          this.statementTrack.play();
+        }),
+    );
   }
 }
 
 export const createTracks = async () => {
   const [forTrack, whileTrack, statementTrack] = await Promise.all([
-    createTrack('ForStatement', true),
-    createTrack('WhileStatement', true),
-    createTrack('default', false)
-  ])
+    createTrack("ForStatement", true),
+    createTrack("WhileStatement", true),
+    createTrack("default", false),
+  ]);
 
   return {
     forTrack,
     whileTrack,
-    statementTrack
-  }
-}
+    statementTrack,
+  };
+};
 
 /**
- * @param {DataType | StructureType | DebugType} sound
+ * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} sound
  * @param {boolean} [loop]
  */
 export const createTrack = async (sound, loop = false) => {
   const { Howl } = await import(
-    /* webpackChunkName: "howler", webpackPrefetch: true */ 'howler'
-  )
+    /* webpackChunkName: "howler", webpackPrefetch: true */ "howler"
+  );
 
   const {
-    sound: { speed: rate, theme, volume }
-  } = store.getState()
+    sound: { speed: rate, theme, volume },
+  } = store.getState();
 
-  const file = soundMap[sound].themes[theme]
+  const file = soundMap[sound].themes[theme];
 
-  console.log(file)
+  console.log(file);
 
   const track = new Howl({
     src: [getUrl(`./sounds/${file}`)],
     loop,
     rate,
-    volume: volume / 100
-  })
+    volume: volume / 100,
+  });
 
-  return track
-}
+  return track;
+};
 
 /**
  * Set the speed on multiple tracks
@@ -272,16 +272,16 @@ export const createTrack = async (sound, loop = false) => {
  */
 export const setMultipleSpeed = (tracklist = []) => {
   const {
-    sound: { speed }
-  } = store.getState()
+    sound: { speed },
+  } = store.getState();
 
-  tracklist.forEach(track => {
+  tracklist.forEach((track) => {
     if (!track) {
-      return
+      return;
     }
 
-    track.rate(speed)
-  })
-}
+    track.rate(speed);
+  });
+};
 
-export default SoundManager
+export default SoundManager;
