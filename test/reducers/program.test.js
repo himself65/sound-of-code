@@ -1,5 +1,6 @@
 import { program as programActions } from "../../src/actions";
 import { createStore } from "../../src/store";
+import { describe, test, beforeEach, expect } from 'vitest'
 
 describe("Program Status", () => {
   describe("states", () => {
