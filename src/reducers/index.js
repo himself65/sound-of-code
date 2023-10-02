@@ -1,12 +1,12 @@
-import * as Redux from 'redux'
+import * as Redux from "redux";
 
-import * as ConsoleReducer from './console'
-import * as ProgramReducer from './program'
-import * as SoundReducer from './sound'
+import * as ConsoleReducer from "./console";
+import * as ProgramReducer from "./program";
+import * as SoundReducer from "./sound";
 
-export { console } from './console'
-export { program } from './program'
-export { sound } from './sound'
+export { console } from "./console";
+export { program } from "./program";
+export { sound } from "./sound";
 
 /**
  * @typedef {object} AppState
@@ -26,4 +26,4 @@ export const app = Redux.combineReducers({
   console: ConsoleReducer.console,
   program: ProgramReducer.program,
   sound: SoundReducer.sound
-})
+});

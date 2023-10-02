@@ -44,15 +44,15 @@ const defaultSoundTypeState = {
   Ending: { volume: 100 },
   RuntimeError: { volume: 100 },
   TypeChange: { volume: 100 }
-}
+};
 
 /** @type {SoundState} */
 const defaultSoundState = {
   speed: 1,
-  theme: 'default',
+  theme: "default",
   volume: 100,
   types: defaultSoundTypeState
-}
+};
 
 /**
  * SoundState reducer
@@ -62,28 +62,28 @@ const defaultSoundState = {
  */
 export const sound = (state = defaultSoundState, action) => {
   switch (action.type) {
-    case 'SOUND_SET_SPEED':
+    case "SOUND_SET_SPEED":
       return {
         ...state,
         speed: action.speed
-      }
+      };
 
-    case 'SOUND_SET_THEME':
+    case "SOUND_SET_THEME":
       return {
         ...state,
         theme: action.theme
-      }
+      };
 
-    case 'SOUND_SET_VOLUME':
+    case "SOUND_SET_VOLUME":
       return {
         ...state,
         volume: action.volume
-      }
+      };
 
     default:
-      return { ...state, types: soundTypes(state.types, action) }
+      return { ...state, types: soundTypes(state.types, action) };
   }
-}
+};
 
 /**
  *
@@ -93,13 +93,13 @@ export const sound = (state = defaultSoundState, action) => {
  */
 const soundTypes = (state = defaultSoundTypeState, action) => {
   switch (action.type) {
-    case 'SOUND_SET_DISTINCT_VOLUME':
+    case "SOUND_SET_DISTINCT_VOLUME":
       return {
         ...state,
         [action.datatype]: { volume: action.volume }
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
