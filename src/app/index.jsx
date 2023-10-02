@@ -1,12 +1,15 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
-import { Router, Link } from '@reach/router'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import EditorContext from '../components/EditorContext'
 import SoundContext from '../components/SoundContext'
 import Editor from '../editor'
 import SoundManager from '../sound/SoundManager'
-import { getUrl } from '../utils'
+import { Dashboard } from '../pages/dashboard'
 
 const Home = lazy(() =>
   import(/* webpackChunkName: "home", webpackPrefetch: true */ '../pages')
@@ -36,18 +39,34 @@ const Resources = lazy(() =>
   )
 )
 
-/**
- * @param {object} props
- * @param {*} props.path
- * @param {*} props.route
- */
-function Page (props) {
-  return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <props.route />
-    </Suspense>
-  )
-}
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Dashboard/>,
+    children: [
+      {
+        path: '/',
+        element: <Home/>,
+      },
+      {
+        path: 'sonify',
+        element: <Sonify/>,
+      },
+      {
+        path: 'preferences',
+        element: <Preferences/>,
+      },
+      {
+        path: 'about',
+        element: <About/>,
+      },
+      {
+        path: 'resources',
+        element: <Resources/>,
+      }
+    ]
+  },
+])
 
 export function App () {
   /** @type {[Editor, React.Dispatch<Editor>]} */
@@ -82,34 +101,10 @@ export function App () {
           />
         </Helmet>
 
-        <header>
-          <div className='col-sm col-md-10 col-md-offset-1'>
-            <Link role='button' to={getUrl('./')}>
-              Home
-            </Link>
-            <Link role='button' to={getUrl('./sonify')}>
-              Sonify
-            </Link>
-            <Link role='button' to={getUrl('./preferences')}>
-              Preferences
-            </Link>
-            <Link role='button' to={getUrl('./about')}>
-              About
-            </Link>
-            <Link role='button' to={getUrl('./resources')}>
-              Tutorial & JS Resources
-            </Link>
-          </div>
-        </header>
-
         <main className='container'>
-          <Router>
-            <Page path='/' route={Home} />
-            <Page path='/sonify' route={Sonify} />
-            <Page path='/preferences' route={Preferences} />
-            <Page path='/about' route={About} />
-            <Page path='/resources' route={Resources} />
-          </Router>
+          <Suspense fallback={<p>Loading...</p>}>
+            <RouterProvider router={router}/>
+          </Suspense>
         </main>
 
         <footer>

@@ -1,7 +1,7 @@
 /** @typedef {ReadonlyArray<string>} ConsoleState */
 
 /** @type {ConsoleState} */
-const defaultConsoleState = []
+const defaultConsoleState = [];
 
 /**
  * ConsoleState reducer
@@ -11,11 +11,11 @@ const defaultConsoleState = []
  */
 export const console = (state = defaultConsoleState, action) => {
   switch (action.type) {
-    case 'CONSOLE_LOG':
-      return state.concat(action.log)
-    case 'CONSOLE_CLEAR':
-      return []
+    case "CONSOLE_LOG":
+      return state.concat(action.log);
+    case "CONSOLE_CLEAR":
+      return [];
     default:
-      return state
+      return state;
   }
-}
+};

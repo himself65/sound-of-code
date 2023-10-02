@@ -1,6 +1,6 @@
-import * as Redux from 'redux'
+import * as Redux from "redux";
 
-import * as Reducers from './reducers'
+import * as Reducers from "./reducers";
 
 /**
  * @typedef {Redux.Store<Reducers.AppState, Redux.AnyAction>} AppStore
@@ -9,6 +9,6 @@ import * as Reducers from './reducers'
 /**
  * @returns {AppStore}
  */
-export const createStore = () => Redux.createStore(Reducers.app)
+export const createStore = () => Redux.createStore(Reducers.app);
 
-export const store = createStore()
+export const store = createStore();

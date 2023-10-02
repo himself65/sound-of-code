@@ -15,10 +15,10 @@ const defaultProgramState = {
   exitStatus: null,
   isExecuting: false,
   skipMode: false,
-  status: 'idle',
+  status: "idle",
   varMap: null,
   weaverStatus: null
-}
+};
 
 /**
  * ProgramState reducer
@@ -28,109 +28,109 @@ const defaultProgramState = {
  */
 export const program = (state = defaultProgramState, action) => {
   switch (action.type) {
-    case 'PROGRAM_SET_START_POINT':
+    case "PROGRAM_SET_START_POINT":
       return {
         ...state,
         startLocation: action.lineNumber,
         skipMode: true
-      }
+      };
 
-    case 'PROGRAM_RESET_START_POINT':
+    case "PROGRAM_RESET_START_POINT":
       return {
         ...state,
         startLocation: -1,
         skipMode: false
-      }
+      };
 
-    case 'PROGRAM_PARSE_PENDING':
+    case "PROGRAM_PARSE_PENDING":
       return {
         ...state,
         exitStatus: null,
         isExecuting: false,
-        status: 'idle',
+        status: "idle",
         varMap: null,
-        weaverStatus: 'parsing'
-      }
+        weaverStatus: "parsing"
+      };
 
-    case 'PROGRAM_PARSE_SUCCESS':
+    case "PROGRAM_PARSE_SUCCESS":
       return {
         ...state,
-        status: 'idle',
-        weaverStatus: 'success'
-      }
+        status: "idle",
+        weaverStatus: "success"
+      };
 
-    case 'PROGRAM_PARSE_REJECTED':
+    case "PROGRAM_PARSE_REJECTED":
       return {
         ...state,
-        status: 'idle',
-        weaverStatus: 'error'
-      }
+        status: "idle",
+        weaverStatus: "error"
+      };
 
-    case 'PROGRAM_START':
+    case "PROGRAM_START":
       return {
         ...state,
         isExecuting: true,
-        status: 'playing',
+        status: "playing",
         varMap: new Map(),
         weaverStatus: null
-      }
+      };
 
-    case 'PROGRAM_PAUSE':
+    case "PROGRAM_PAUSE":
       return {
         ...state,
-        status: 'paused'
-      }
+        status: "paused"
+      };
 
-    case 'PROGRAM_RESUME':
+    case "PROGRAM_RESUME":
       return {
         ...state,
-        status: 'playing'
-      }
+        status: "playing"
+      };
 
-    case 'PROGRAM_NORMAL_MODE':
+    case "PROGRAM_NORMAL_MODE":
       return {
         ...state,
         skipMode: false
-      }
+      };
 
-    case 'PROGRAM_TRACK':
+    case "PROGRAM_TRACK":
       return {
         ...state,
         varMap: new Map(state.varMap).set(action.identifier, action.dataType)
-      }
+      };
 
-    case 'PROGRAM_ABORT':
+    case "PROGRAM_ABORT":
       if (!state.isExecuting) {
-        return state
+        return state;
       }
 
       return {
         ...state,
-        exitStatus: 'abort',
+        exitStatus: "abort",
         isExecuting: false,
-        status: 'stopped',
+        status: "stopped",
         skipMode: state.startLocation !== -1
-      }
+      };
 
-    case 'PROGRAM_FINISH':
+    case "PROGRAM_FINISH":
       return {
         ...state,
-        exitStatus: 'success',
+        exitStatus: "success",
         isExecuting: false,
-        status: 'stopped',
+        status: "stopped",
         skipMode: state.startLocation !== -1
-      }
+      };
 
-    case 'PROGRAM_ERROR':
+    case "PROGRAM_ERROR":
       return {
         ...state,
-        exitStatus: 'error',
+        exitStatus: "error",
         isExecuting: false,
-        status: 'stopped',
+        status: "stopped",
         skipMode: state.startLocation !== -1
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
