@@ -1,3 +1,4 @@
+import 'mini.css/dist/mini-default.css'
 import './styles/main.less'
 import React from 'react'
 import { render } from 'react-dom'

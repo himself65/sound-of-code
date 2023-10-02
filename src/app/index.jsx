@@ -104,11 +104,11 @@ export function App () {
 
         <main className='container'>
           <Router>
-            <Page path={getUrl('./')} route={Home} />
-            <Page path={getUrl('./sonify')} route={Sonify} />
-            <Page path={getUrl('./preferences')} route={Preferences} />
-            <Page path={getUrl('./about')} route={About} />
-            <Page path={getUrl('./resources')} route={Resources} />
+            <Page path='/' route={Home} />
+            <Page path='/sonify' route={Sonify} />
+            <Page path='/preferences' route={Preferences} />
+            <Page path='/about' route={About} />
+            <Page path='/resources' route={Resources} />
           </Router>
         </main>
 

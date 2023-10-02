@@ -1,5 +1,3 @@
-import { resolve } from 'path'
-
 /**
  * @param {string} filename
  * @param {string} text
@@ -26,9 +24,7 @@ export const download = (filename, text) => {
  * @returns {string} absolute URL
  */
 export const getUrl = url => {
-  const isProduction = process.env.NODE_ENV === 'production'
-
-  return isProduction ? resolve('/~myra/Temp/build/', url) : resolve('/', url)
+  return '/' + url
 }
 
 /**
