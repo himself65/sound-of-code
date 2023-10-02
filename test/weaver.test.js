@@ -1,6 +1,7 @@
 import { readFile } from "node:fs";
 import { join } from "node:path";
 import { promisify } from "node:util";
+import { describe, expect, test } from "vitest";
 
 import { alterProgram } from "../src/debugger/weaver";
 
@@ -10,7 +11,7 @@ const exampleMap = new Map();
 /* Utility functions */
 const readFileAsync = promisify(readFile);
 
-const readExample = async filename => {
+const readExample = async (filename) => {
   if (exampleMap.has(filename)) {
     return exampleMap.get(filename);
   }
@@ -18,8 +19,8 @@ const readExample = async filename => {
   const example = await readFileAsync(
     join(__dirname, "../static/examples/", filename),
     {
-      encoding: "utf8"
-    }
+      encoding: "utf8",
+    },
   );
 
   exampleMap.set(filename, example);

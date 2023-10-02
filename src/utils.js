@@ -6,7 +6,7 @@ export const download = (filename, text) => {
   const element = document.createElement("a");
   element.setAttribute(
     "href",
-    "data:text/JavaScript," + encodeURIComponent(text)
+    "data:text/JavaScript," + encodeURIComponent(text),
   );
   element.setAttribute("download", filename);
 
@@ -23,7 +23,7 @@ export const download = (filename, text) => {
  * @param {string} url URL relative to domain
  * @returns {string} absolute URL
  */
-export const getUrl = url => {
+export const getUrl = (url) => {
   return "/" + url;
 };
 
@@ -62,4 +62,4 @@ export const save = async (id, item) => {
  * @returns {Promise<void>}
  */
 export const sleep = (ms = 0) =>
-  new Promise(resolve => setTimeout(resolve, ms));
+  new Promise((resolve) => setTimeout(resolve, ms));

@@ -17,7 +17,7 @@ const defaultProgramState = {
   skipMode: false,
   status: "idle",
   varMap: null,
-  weaverStatus: null
+  weaverStatus: null,
 };
 
 /**
@@ -32,14 +32,14 @@ export const program = (state = defaultProgramState, action) => {
       return {
         ...state,
         startLocation: action.lineNumber,
-        skipMode: true
+        skipMode: true,
       };
 
     case "PROGRAM_RESET_START_POINT":
       return {
         ...state,
         startLocation: -1,
-        skipMode: false
+        skipMode: false,
       };
 
     case "PROGRAM_PARSE_PENDING":
@@ -49,21 +49,21 @@ export const program = (state = defaultProgramState, action) => {
         isExecuting: false,
         status: "idle",
         varMap: null,
-        weaverStatus: "parsing"
+        weaverStatus: "parsing",
       };
 
     case "PROGRAM_PARSE_SUCCESS":
       return {
         ...state,
         status: "idle",
-        weaverStatus: "success"
+        weaverStatus: "success",
       };
 
     case "PROGRAM_PARSE_REJECTED":
       return {
         ...state,
         status: "idle",
-        weaverStatus: "error"
+        weaverStatus: "error",
       };
 
     case "PROGRAM_START":
@@ -72,31 +72,31 @@ export const program = (state = defaultProgramState, action) => {
         isExecuting: true,
         status: "playing",
         varMap: new Map(),
-        weaverStatus: null
+        weaverStatus: null,
       };
 
     case "PROGRAM_PAUSE":
       return {
         ...state,
-        status: "paused"
+        status: "paused",
       };
 
     case "PROGRAM_RESUME":
       return {
         ...state,
-        status: "playing"
+        status: "playing",
       };
 
     case "PROGRAM_NORMAL_MODE":
       return {
         ...state,
-        skipMode: false
+        skipMode: false,
       };
 
     case "PROGRAM_TRACK":
       return {
         ...state,
-        varMap: new Map(state.varMap).set(action.identifier, action.dataType)
+        varMap: new Map(state.varMap).set(action.identifier, action.dataType),
       };
 
     case "PROGRAM_ABORT":
@@ -109,7 +109,7 @@ export const program = (state = defaultProgramState, action) => {
         exitStatus: "abort",
         isExecuting: false,
         status: "stopped",
-        skipMode: state.startLocation !== -1
+        skipMode: state.startLocation !== -1,
       };
 
     case "PROGRAM_FINISH":
@@ -118,7 +118,7 @@ export const program = (state = defaultProgramState, action) => {
         exitStatus: "success",
         isExecuting: false,
         status: "stopped",
-        skipMode: state.startLocation !== -1
+        skipMode: state.startLocation !== -1,
       };
 
     case "PROGRAM_ERROR":
@@ -127,7 +127,7 @@ export const program = (state = defaultProgramState, action) => {
         exitStatus: "error",
         isExecuting: false,
         status: "stopped",
-        skipMode: state.startLocation !== -1
+        skipMode: state.startLocation !== -1,
       };
 
     default:

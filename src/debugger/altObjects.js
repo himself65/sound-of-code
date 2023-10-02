@@ -22,20 +22,20 @@ export const altConsole = {
   warn: (...items) => {
     store.dispatch(consoleActions.addLog(...items));
     console.warn(...items);
-  }
+  },
 };
 
 export const altLocation = { ...window.location };
 
 Object.defineProperty(altLocation, "href", {
   get: () => window.location.href,
-  set: _ => {
-    altConsole.error(`Setting href is disabled!`);
-  }
+  set: (_) => {
+    altConsole.error("Setting href is disabled!");
+  },
 });
 
 export const altWindow = {
   ...window,
   console: altConsole,
-  location: altLocation
+  location: altLocation,
 };
