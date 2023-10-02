@@ -22,12 +22,8 @@ All defined in the `scripts` section of `package.json`
 
 - `npm run build` - Builds a production version. Specifically for publishing purposes.
 - `npm run dev` - Builds development version and watches files for changes. For development use only!
-- `npm run format` - Formats source code
-- `npm run format:docs` - Formats documentation files
-- `npm run format:styles` - Formats stylesheets
 - `npm run lint` - Lints source code for Standard Style formatting
-- `npm run lint:types` - Type checks the source code using TypeScript
-- `npm test` - Runs linter and unit tests
+- `npm test` - Runs unit tests
 
 Resources, API descriptions, and other documents related to packages in use are linked in [`docs/package-resources.md`](docs/package-resources.md).
 
