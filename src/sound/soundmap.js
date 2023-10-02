@@ -16,7 +16,7 @@
  * @property {Info} info
  */
 
-/** @type {DataTypes<SoundInfo>} */
+/** @type {import("../type").DataTypes<SoundInfo>} */
 export const types = {
   array: {
     themes: {
@@ -110,7 +110,7 @@ export const types = {
   }
 };
 
-/** @type {StructureTypes<SoundInfo>} */
+/** @type {import("../type").StructureTypes<SoundInfo>} */
 export const structures = {
   BinaryExpression: {
     themes: {
@@ -224,7 +224,7 @@ export const structures = {
   }
 };
 
-/** @type {DebugTypes<SoundInfo>} */
+/** @type {import("../type").DebugTypes<SoundInfo>} */
 export const others = {
   BadStatement: {
     themes: {

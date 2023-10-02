@@ -49,7 +49,7 @@ export const resume = () => ({ type: "PROGRAM_RESUME" });
 
 /**
  * Tracks a variable and its datatype
- * @param {{ dataType: DataType, identifier: string }} info
+ * @param {{ dataType: import("../type").DataType, identifier: string }} info
  */
 export const trackType = info => ({
   type: "PROGRAM_TRACK",

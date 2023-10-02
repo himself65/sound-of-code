@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import type { AppState } from '../reducers'
+import type { ProgramState } from '../reducers/program'
 
 export function ScopeMap () {
   const displayRef = useRef(null)
-  /** @type {ReadonlyMap<string, string>} */
-  const map = useSelector(state => state.program.varMap)
+  const map = useSelector<AppState, Pick<ProgramState, 'varMap'>['varMap']>(state => state.program.varMap)
 
   useEffect(() => {
     const ref = displayRef.current

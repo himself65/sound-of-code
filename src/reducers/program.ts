@@ -1,16 +1,18 @@
-/**
- * @typedef {object} ProgramState
- * @property {number} startLocation
- * @property {'error' | 'success' | 'abort'} exitStatus
- * @property {boolean} isExecuting
- * @property {boolean} skipMode
- * @property {'idle' | 'stopped' | 'playing' | 'paused'} status
- * @property {ReadonlyMap<string, DataType>} varMap
- * @property {'parsing' | 'success' | 'error'} weaverStatus
- */
+import type { AnyAction } from "redux";
 
-/** @type {ProgramState} */
-const defaultProgramState = {
+export type DataType = "number" | "string" | "boolean" | "array" | "object" | "null" | "undefined";
+
+export type ProgramState = {
+  startLocation: number;
+  exitStatus: "error" | "success" | "abort" | null;
+  isExecuting: boolean;
+  skipMode: boolean;
+  status: "idle" | "stopped" | "playing" | "paused";
+  varMap: ReadonlyMap<string, DataType> | null;
+  weaverStatus: "parsing" | "success" | "error" | null;
+}
+
+const defaultProgramState: ProgramState = {
   startLocation: -1,
   exitStatus: null,
   isExecuting: false,
@@ -20,13 +22,7 @@ const defaultProgramState = {
   weaverStatus: null
 };
 
-/**
- * ProgramState reducer
- * @param {Readonly<ProgramState>} state
- * @param {any} action
- * @returns {Readonly<ProgramState>}
- */
-export const program = (state = defaultProgramState, action) => {
+export const program = (state: ProgramState = defaultProgramState, action: AnyAction): ProgramState => {
   switch (action.type) {
     case "PROGRAM_SET_START_POINT":
       return {

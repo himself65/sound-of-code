@@ -131,7 +131,7 @@ export class Hooks {
       return item;
     }
 
-    /** @type {DataType} */
+    /** @type {import("../type").DataType} */
     let type;
 
     if (Array.isArray(item)) {

@@ -9,7 +9,7 @@ export class SoundManager {
     this.forDepth = 0;
     this.whileDepth = 0;
 
-    /** @type {DataType | StructureType | DebugType} */
+    /** @type {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} */
     this.currentTrack = "default";
 
     this.ready = false;
@@ -32,7 +32,7 @@ export class SoundManager {
 
   /**
    * Changes the sound theme
-   * @param {Theme} theme
+   * @param {import("../type").Theme} theme
    */
   async setTheme(theme) {
     store.dispatch(soundActions.setTheme(theme));
@@ -48,7 +48,7 @@ export class SoundManager {
 
   /**
    * @param {Howl} track
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    * @param {boolean?} checkCurrent
    */
   adjustTrackVolume(track, type, checkCurrent = false) {
@@ -72,7 +72,7 @@ export class SoundManager {
   }
 
   /**
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    * @param {number} volume
    */
   setTypeVolume(type, volume) {
@@ -157,7 +157,7 @@ export class SoundManager {
 
   /**
    * Set the statement track to a new type
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    */
   async setValueType(type) {
     const calledType = soundMap[type] ? type : "default";
@@ -195,7 +195,7 @@ export class SoundManager {
 
   /**
    * Play a sound for a statement
-   * @param {DataType | StructureType | DebugType} type
+   * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    */
   play(type) {
     this.resumeLoops();
@@ -240,7 +240,7 @@ export const createTracks = async () => {
 };
 
 /**
- * @param {DataType | StructureType | DebugType} sound
+ * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} sound
  * @param {boolean} [loop]
  */
 export const createTrack = async (sound, loop = false) => {
