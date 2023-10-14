@@ -27,17 +27,24 @@ export function About () {
               of an MS thesis by Kevin North.
             </p>
             <p>
-              The current version for JavaScript was developed as part of a
+              The original version for JavaScript was developed as part of a
               2017-18 senior design team project at UNL under the guidance of
               Myra Cohen. We thank all of the original developers for their
               ideas and initial work that led to this project.
+            </p>
+
+            <p>
+              In 2023 the project was taken over by an Iowa State Senior design 
+              team to update the application and add new features. Working with
+              what the original developrs had created, they were able to improve 
+              the Sound of Code and help more people gain access to it locally.
             </p>
           </div>
         </div>
       </div>
 
       <div className='row'>
-        <h2 className='col-sm-12 col-md-offset-1 col-md-10'>Current Team</h2>
+        <h2 className='col-sm-12 col-md-offset-1 col-md-10'>Original Team</h2>
       </div>
 
       <div className='row'>

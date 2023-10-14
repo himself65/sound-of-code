@@ -109,7 +109,7 @@ export function App () {
 
         <footer>
           <div className='col-sm col-md-10 col-md-offset-1'>
-            <p>Sound of Code, UNL 2017-2018</p>
+            <p>Sound of Code, UNL 2017-2018, ISU 2023</p>
           </div>
         </footer>
       </EditorContext.Provider>
