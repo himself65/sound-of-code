@@ -192,6 +192,84 @@ export function About () {
           </div>
         </div>
       </div>
+
+      <div className='row'>
+        <h2 className='col-sm-12 col-md-offset-1 col-md-10'>Current Team</h2>
+      </div>
+
+      <div className='row'>
+        <hr className='col-sm-12 col-md-offset-1 col-md-10' />
+      </div>
+
+      <div className='row'>
+        <h3 className='col-sm-12 col-md-offset-1 col-md-10'>Developers</h3>
+      </div>
+
+      
+      <div className='row'>
+        <div className='col-sm-offset-2 col-sm-8 col-md-offset-1 col-md-3'>
+          <div className='card fluid'>
+            <img src={getUrl('./img/about/alex.jpg')} alt='Alex Yang' />
+
+            <div className='section'>
+              <h4>Alex Yang</h4>
+              <p>Developer</p>
+              <p>Computer Science</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-3'>
+          <div className='card fluid'>
+            <img src={getUrl('./img/about/shuwei.jpg')} alt='Shuwei Cui' />
+
+            <div className='section'>
+              <h4>Shuwei Cui</h4>
+              <p>Development</p>
+              <p>Computer Science</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-3'>
+          <div className='card fluid'>
+            <img src={getUrl('./img/about/gavin.jpg')} alt='Gavin Hyde' />
+
+            <div className='section'>
+              <h4>Gavin Hyde</h4>
+              <p>Developer</p>
+              <p>Computer Science</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='row'>
+        <div className='col-sm-offset-2 col-sm-8 col-md-offset-1 col-md-3'>
+          <div className='card fluid'>
+            <img src={getUrl('./img/about/chichang.jpg')} alt='Chichang Lin' />
+
+            <div className='section'>
+              <h4>Chichang Lin</h4>
+              <p>Developer</p>
+              <p>Computer Science</p>
+            </div>
+          </div>
+        </div>
+
+        <div className='col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-3'>
+          <div className='card fluid'>
+            <img src={getUrl('./img/about/yunjie.jpg')} alt='Yunjie Li' />
+
+            <div className='section'>
+              <h4>Yunjie Li</h4>
+              <p>Developer</p>
+              <p>Computer Science</p>
+            </div>
+          </div>
+        </div>
+        </div>
+
     </React.Fragment>
   )
 }
