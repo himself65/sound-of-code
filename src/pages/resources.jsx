@@ -119,14 +119,6 @@ export function Resources () {
               <a href='https://github.com/getify/You-Dont-Know-JS'>
                 You Don't Know JS (book series)
               </a>
-
-              <ul>
-                <li>
-                  <a href='https://github.com/getify/You-Dont-Know-JS/blob/master/types%20&%20grammar/README.md'>
-                    Types and Grammar
-                  </a>
-                </li>
-              </ul>
             </li>
 
             <li>
