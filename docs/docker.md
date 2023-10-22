@@ -23,13 +23,10 @@ docker ps
 docker logs [ContainerId]
 // print out information about givin container
 
-docker run -dp 8000:3000 [ImageName] // for my case: shuweic227/soc_init
+docker run -dp 5173:5173 [ImageName] // for my case: shuweic227/soc_init
 // run image with port set
 
-docker run shuweic227/soc_init
-// run the image from terminal
-
-// final step: go for localhost:8000
+// final step: go for localhost:5173
 
 docker ps -a --filter "ancestor=shuweic227/soc_init"
 // list all containers with ancestor image
