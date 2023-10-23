@@ -83,7 +83,7 @@ export function About () {
       <div className="image-row">
       <div className="image-container">
         <div className="image-wrapper">
-          <img src="/img/about/alex.jpg" alt="Alex Yang" />
+          <img src="/img/about/alex.png" alt="Alex Yang" />
         </div>
         <p className="caption">Alex Yang</p>
       </div>
