@@ -56,13 +56,13 @@ export function About () {
       <div className="image-row">
       <div className="image-container">
         <div className="image-wrapper">
-          <img src="/img/about/myra.jpg" alt="Myra Cohen" />
+          <img src="/img/about/myrac.png" alt="Myra Cohen" />
         </div>
         <p className="caption">Myra Cohen</p>
       </div>
       <div className="image-container">
         <div className="image-wrapper">
-          <img src="/img/about/james.jpg" alt="James Lanthrop" />
+          <img src="/img/about/james.png" alt="James Lanthrop" />
         </div>
         <p className="caption">James Lanthrop</p>
       </div>

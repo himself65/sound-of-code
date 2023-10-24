@@ -11,7 +11,7 @@ export const Dashboard = () => {
             Home
           </Link>
           <Link role="button" to={getUrl('./sonify')}>
-            Sonify
+            Sonify Console
           </Link>
           <Link role="button" to={getUrl('./preferences')}>
             Preferences
@@ -19,8 +19,11 @@ export const Dashboard = () => {
           <Link role="button" to={getUrl('./about')}>
             About
           </Link>
+          <Link role="button" to={getUrl('./tutorial')}>
+            Tutorial
+          </Link>
           <Link role="button" to={getUrl('./resources')}>
-            Tutorial & JS Resources
+            Resources
           </Link>
         </div>
       </header>

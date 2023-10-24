@@ -39,6 +39,42 @@ const Resources = lazy(() =>
   )
 )
 
+const Tutorial = lazy(() =>
+    import(
+      /* webpackChunkName: "tutorial", webpackPrefetch: true */ '../pages/tutorial'
+    )
+)
+
+const Tutorial2 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial2", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial2'
+  )
+)
+
+const Tutorial3 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial3", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial3'
+  )
+)
+
+const Tutorial4 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial4", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial4'
+  )
+)
+
+const Tutorial5 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial5", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial5'
+  )
+)
+
+const Tutorial6 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial6", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial6'
+  )
+)
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -63,6 +99,30 @@ const router = createBrowserRouter([
       {
         path: 'resources',
         element: <Resources/>,
+      },
+      {
+        path: 'tutorial',
+        element: <Tutorial/>,
+      },
+      {
+        path: 'tutorial2',
+        element: <Tutorial2/>,
+      },
+      {
+        path: 'tutorial3',
+        element: <Tutorial3/>,
+      },
+      {
+        path: 'tutorial4',
+        element: <Tutorial4/>,
+      },
+      {
+        path: 'tutorial5',
+        element: <Tutorial5/>,
+      },
+      {
+        path: 'tutorial6',
+        element: <Tutorial6/>,
       }
     ]
   },
