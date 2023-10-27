@@ -20,7 +20,7 @@ class BSTree {
     //There is three case here
     //1. The tree is empty, we simply add node to the root
     //2. The value is smaller, we go to the left
-    //3. everything, we go to the right
+    //3. everything else, we go to the right
     insert(value){
         const node = new Node(value);
         if(!this.root){
@@ -55,7 +55,7 @@ class BSTree {
         }
 
         //we use a first in first out queue here, thanks the dynamic array manipulation
-        //we can use an array to implement our FIFO queue.
+        //in the Javascript, we can use an array to implement our FIFO queue.
         const queue = [this.root];
         let index = 0;
         //We also can think the tree as an array, therefore, for node i, the index can be

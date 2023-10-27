@@ -16,6 +16,7 @@ const programs = [
   { title: 'No Structure', filename: 'NoStructure.js' },
   { title: 'String Test', filename: 'StringTest.js' },
   { title: 'Functions', filename: 'Functions.js' },
+  { title: 'Binary Tree', filename: 'BinaryTree.js'},
   {
     title: 'Duplicate Declartion',
     filename: 'DuplicateDeclaration.js',
