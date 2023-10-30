@@ -22,6 +22,9 @@ export const Dashboard = () => {
           <Link role="button" to={getUrl('./resources')}>
             Tutorial & JS Resources
           </Link>
+          <Link role="button" to={getUrl('./question')}>
+            Question
+          </Link>
         </div>
       </header>
       <Outlet/>

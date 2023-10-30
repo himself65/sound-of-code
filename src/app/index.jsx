@@ -39,6 +39,12 @@ const Resources = lazy(() =>
   )
 )
 
+const Question = lazy(() =>
+  import(
+    /* webpackChunkName: "resources", webpackPrefetch: true */ '../pages/question'
+  )
+)
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -63,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: 'resources',
         element: <Resources/>,
+      },
+      {
+        path: 'question',
+        element: <Question/>,
       }
     ]
   },

@@ -1,18 +1,22 @@
 import React, { useState }  from 'react'
 import { Helmet } from 'react-helmet'
-import '../styles/feedback.less';
+import '../styles/question.less';
 
 export default function question() {
+    const MAX_LENGTH = 300;
     const [question, setquestion] = useState("");
   
     const handleSubmit = () => {
-      if (question) {
-        // 在此处添加发送反馈到服务器的代码
+      if (question.trim() && question.trim().length <= MAX_LENGTH) {
+        window.location.href = `mailto:123@iastate.edu?subject=Code Question&body=${encodeURIComponent(question)}`;
+        setquestion(""); 
         alert("Your question has been submitted, thank you for asking!");
         setquestion("");
-      } else {
+      } else if (!question.trim()) {
         alert("Question cannot be empty!");
-      }
+    } else {
+        alert(`Your question must be less than ${MAX_LENGTH} characters!`);
+    }
     };
   
     return (
