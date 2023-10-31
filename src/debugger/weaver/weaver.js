@@ -173,6 +173,21 @@ export const modifyStatement = (node, settings = defaultSettings) => {
     case "WhileStatement":
       return modWhileStatement(node, settings);
 
+    case "ClassDeclaration":
+      return modClassDeclaration(node, settings);
+
+    case "ClassBody":
+      return modClassBody(node, settings);
+
+    case "MethodDefinition":
+      return modMethodDefinition(node, settings);
+
+    case "ThisExpression":
+      return modThisExpression(node, settings);
+
+    case "NewExpression":
+      return modNewExpression(node, settings);
+
     /* istanbul ignore next */
     default:
       return `undefined /* Type not supported: ${type}\n ${JSON.stringify(
@@ -181,6 +196,66 @@ export const modifyStatement = (node, settings = defaultSettings) => {
         2,
       )}*/`;
   }
+};
+
+/**
+ * @param {any} node
+ * @param {WeaverSettings} settings
+ * @returns {string}
+ */
+export const modClassDeclaration = (node, settings) => {
+  const { id, superClass, body } = node;
+  const modifiedBody = modifyStatement(body, settings);
+  return `class ${id.name} ${
+    superClass ? `extends ${superClass.name} ` : ""
+  }{${modifiedBody}}`;
+};
+
+/**
+ * @param {any} node
+ * @param {WeaverSettings} settings
+ * @returns {string}
+ */
+export const modClassBody = (node, settings) => {
+  const { body } = node;
+  return body.map((member) => modifyStatement(member, settings)).join("\n");
+};
+
+/**
+ * @param {any} node
+ * @param {WeaverSettings} settings
+ * @returns {string}
+ */
+export const modMethodDefinition = (node, settings) => {
+  const { key, kind, value } = node;
+  const modifiedFunction = modMethodFunctionExpression(
+    value,
+    settings,
+    key.name,
+  );
+  return `${kind === "constructor" ? "constructor" : ""} ${modifiedFunction}`;
+};
+
+/**
+ * @param {any} node
+ * @param {WeaverSettings} settings
+ * @returns {string}
+ */
+export const modThisExpression = (node, settings) => {
+  return "this";
+};
+
+/**
+ * @param {any} node
+ * @param {WeaverSettings} settings
+ * @returns {string}
+ */
+export const modNewExpression = (node, settings) => {
+  const { callee, arguments: args } = node;
+  const modifiedArguments = args
+    .map((arg) => modifyStatement(arg, settings))
+    .join(", ");
+  return `new ${callee.name}(${modifiedArguments})`;
 };
 
 /**
@@ -452,6 +527,20 @@ export const modFunctionExpression = (node, settings) => {
   const funcBody = modifyStatement(body, settings);
 
   return `async function ${identifier} (${parameters}) ${funcBody}`;
+};
+
+export const modMethodFunctionExpression = (node, settings, methodName) => {
+  const { id, params, body } = node;
+
+  // If it's a method, we don't prefix it with an identifier
+  const identifier = methodName ? methodName : modifyStatement(id, settings);
+  const parameters = params
+    .map((param) => modifyStatement(param, settings))
+    .join(", ");
+  const funcBody = modifyStatement(body, settings);
+  const isAsync = node.async;
+
+  return `${isAsync ? "async" : ""} ${identifier} (${parameters}) ${funcBody}`;
 };
 
 /**
