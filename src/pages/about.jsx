@@ -89,9 +89,9 @@ export function About () {
       </div>
       <div className="image-container">
         <div className="image-wrapper">
-          <img src="/img/about/shuwei.jpg" alt="Shuwei Chang" />
+          <img src="/img/about/shuwei.jpg" alt="Shuwei Cui" />
         </div>
-        <p className="caption">Shuwei Chang</p>
+        <p className="caption">Shuwei Cui</p>
       </div>
       <div className="image-container">
         <div className="image-wrapper">
