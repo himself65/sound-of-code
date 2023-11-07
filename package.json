@@ -87,6 +87,7 @@
     "eslint-config-prettier": "^9.0.0",
     "howler": "^2.1.2",
     "mini.css": "^3.0.1",
+    "node": "^20.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",

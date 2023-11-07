@@ -39,9 +39,46 @@ const Resources = lazy(() =>
   )
 )
 
+const Tutorial = lazy(() =>
+    import(
+      /* webpackChunkName: "tutorial", webpackPrefetch: true */ '../pages/tutorial'
+    )
+)
+
+const Tutorial2 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial2", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial2'
+  )
+)
+
+const Tutorial3 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial3", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial3'
+  )
+)
+
+const Tutorial4 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial4", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial4'
+  )
+)
+
+const Tutorial5 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial5", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial5'
+  )
+)
+
+const Tutorial6 = lazy(() =>
+  import (
+    /* webpackChunkName: "tutorial6", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial6'
+  )
+)
+
 const Question = lazy(() =>
   import(
     /* webpackChunkName: "resources", webpackPrefetch: true */ '../pages/question'
+
   )
 )
 
@@ -71,6 +108,29 @@ const router = createBrowserRouter([
         element: <Resources/>,
       },
       {
+        path: 'tutorial',
+        element: <Tutorial/>,
+      },
+      {
+        path: 'tutorial2',
+        element: <Tutorial2/>,
+      },
+      {
+        path: 'tutorial3',
+        element: <Tutorial3/>,
+      },
+      {
+        path: 'tutorial4',
+        element: <Tutorial4/>,
+      },
+      {
+        path: 'tutorial5',
+        element: <Tutorial5/>,
+      },
+      {
+        path: 'tutorial6',
+        element: <Tutorial6/>,
+
         path: 'question',
         element: <Question/>,
       }
@@ -119,7 +179,7 @@ export function App () {
 
         <footer>
           <div className='col-sm col-md-10 col-md-offset-1'>
-            <p>Sound of Code, UNL 2017-2018</p>
+            <p>Sound of Code, UNL 2017-2018, ISU 2023</p>
           </div>
         </footer>
       </EditorContext.Provider>

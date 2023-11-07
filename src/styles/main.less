@@ -22,3 +22,88 @@ main {
     width: 100%;
   }
 }
+
+.image-row {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 200px; /* Adjust the indentation as needed */
+}
+
+.image-container {
+  text-align: center;
+  flex: 1;
+}
+
+.image-wrapper {
+  width: 200px; /* Set the desired width */
+  height: 200px; /* Set the desired height */
+  overflow: hidden;
+  position: relative;
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.caption {
+  margin-top: 10px;
+  text-align: left;
+  margin-bottom: 0px;
+}
+
+.caption2 {
+  margin-top: 0px;
+  text-align:left;
+}
+
+.slide {
+  margin-top: 10px;
+  margin-right: 200px;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* 100% viewport height for full-screen */
+  background-color: #f0f0f0; /* Set a background color for the container */
+}
+
+/* Style for the text above the GIF */
+.slidetext {
+  text-align: left;
+  margin-top:20px;
+  margin-left:200px;
+  font-size: 30px;
+}
+
+/* Style for the GIF */
+.gif {
+  max-width: 20%;
+  height: auto;
+}
+
+.buttons {
+  margin-top:5px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.buttoncolor {
+  color: white !important;
+  background-color: #4c8bf5 !important;
+}
+
+.button_color_green {
+  color: white !important;
+  background-color: green !important;
+}
