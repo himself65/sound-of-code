@@ -130,7 +130,8 @@ const router = createBrowserRouter([
       {
         path: 'tutorial6',
         element: <Tutorial6/>,
-
+      },
+      {
         path: 'question',
         element: <Question/>,
       }
