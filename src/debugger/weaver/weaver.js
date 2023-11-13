@@ -22,9 +22,7 @@ export const alterProgram = async (code, settings) => {
   let babelStandalone;
 
   if (transpile) {
-    babelStandalone = await import(
-      /* webpackChunkName: "babel-standalone" */ "babel-standalone"
-    );
+    babelStandalone = await import("@babel/standalone");
   }
 
   let output = "";
