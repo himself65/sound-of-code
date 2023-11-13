@@ -8,7 +8,7 @@ export PATH=$PATH:/Applications/Docker.app/Contents/Resources/bin
 
 docker run [IMAGEID]
 // build image by ImageId
-docker build -t [dockerUserName]/[nameService] .     // DockerId/ProjName
+docker build -t [dockerUserName]/[nameService] . // DockerId/ProjName
 // build image by tag
 
 docker run [dockerUserName]/[imageName]
@@ -33,5 +33,4 @@ docker ps -a --filter "ancestor=shuweic227/soc_init"
 
 docker stop [ContainerId]
 // kill container base on id
-
 ```

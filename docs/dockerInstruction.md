@@ -14,10 +14,10 @@ This guide provides step-by-step instructions on how to run our project using Do
 
   check if you got docker installed correct:
 
-    ```bash
-    docker
-    // should print out the command and info of docker
-    ```
+  ```bash
+  docker
+  // should print out the command and info of docker
+  ```
 
 - Docker Compose (if using) [Download Docker Compose](https://docs.docker.com/compose/install/)
 
@@ -48,7 +48,6 @@ docker build -t [image_name] .
 
    Docker is gonna create a container for you when you are not run with concrete container
 
-
 ```bash
 docker run -p 5173:5173 -d [image_name]
 ```
@@ -63,30 +62,30 @@ docker run -d --name [container_name] [image_name]
 ```
 
 1. Other common command (Optional)
-    - Override the default command
 
-    ```bash
-    	docker run [image_name] [CMD]
-    ```
+   - Override the default command
 
-    - print out the infomation about all the running docker image
+   ```bash
+   	docker run [image_name] [CMD]
+   ```
 
-    ```bash
-    	docker ps
-    ```
+   - print out the infomation about all the running docker image
 
-    - print out infomation about givin container
+   ```bash
+   	docker ps
+   ```
 
-    ```bash
-    	docker logs [container_id]
-    ```
+   - print out infomation about givin container
 
-    - Override the default command
+   ```bash
+   	docker logs [container_id]
+   ```
 
-    ```bash
-    	docker run shuweic227/posts [CMD]
-    ```
+   - Override the default command
 
+   ```bash
+   	docker run shuweic227/posts [CMD]
+   ```
 
 ## **Using Docker Compose (Optional)**
 
