@@ -1,0 +1,23 @@
+@day-background-color: white;
+@day-text-color: black;
+
+@night-background-color: #2c3e50;
+@night-text-color: white;
+
+body {
+  background-color: @day-background-color;
+  color: @day-text-color;
+}
+
+body.dark-mode {
+  background-color: @night-background-color;
+  color: @night-text-color;
+
+  .navbar {
+    background-color: #34495e;
+  }
+  
+  .button {
+    background-color: darken(@night-background-color, 10%);
+  }
+}
