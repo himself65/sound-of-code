@@ -107,3 +107,31 @@ main {
   color: white !important;
   background-color: green !important;
 }
+
+.dark-mode-toggle {
+  padding: 5px 10px;
+  margin-left: 15px;
+  background-color: #555;
+  color: white;
+  border: none;
+  cursor: pointer;
+  float: right; 
+  border-radius: 4px;
+}
+
+// Global style switches to night mode
+body.dark-mode {
+  background-color: #2c3e50;
+  color: #fff;
+
+  // Night mode styling for specific components
+  header, .description, .card, .slide {
+    background-color: darken(#2c3e50, 5%);
+    color: #fff;
+  }
+
+  // Change the color of the button or component
+  .buttoncolor, .button_color_green {
+    background-color: darken(#2c3e50, 10%);
+  }
+}

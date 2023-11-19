@@ -1,16 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 
 import PlaybackControls from '../components/PlaybackControls'
 import SoundTable from '../components/SoundTable'
+import '../styles/main.less';
 
 export function Preferences () {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark-mode');
+  };
+
   return (
     <React.Fragment>
       <Helmet title='Preferences | Sound of Code' />
 
       <div className='row'>
-        <h1 className='col-md-offset-1 col-md-10'>Preferences</h1>
+        <h1 className='col-md-offset-1 col-md-10'>
+          Preferences
+          <button 
+            onClick={toggleDarkMode} 
+            className="dark-mode-toggle">
+            {darkMode ? 'Day Mode' : 'Night Mode'}
+          </button>
+        </h1>
       </div>
 
       <br></br>
