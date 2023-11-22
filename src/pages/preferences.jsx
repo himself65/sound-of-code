@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import PlaybackControls from '../components/PlaybackControls'
 import SoundTable from '../components/SoundTable'
 import '../styles/main.less';
+import '../styles/preferences.less';
 
 export function Preferences () {
   const [darkMode, setDarkMode] = useState(false);
@@ -39,11 +40,17 @@ export function Preferences () {
         </div>
       </div>
 
+      
+
       <br></br>
 
       <div className='row'>
         <div className='col-lg-offset-3' />
-
+        <button 
+            onClick={toggleDarkMode} 
+            className="upload">
+            {darkMode ? 'Day Mode' : 'Night Mode'}
+          </button>
         <PlaybackControls />
       </div>
 
