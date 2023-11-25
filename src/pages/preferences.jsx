@@ -9,6 +9,23 @@ import '../styles/preferences.less';
 export function Preferences () {
   const [darkMode, setDarkMode] = useState(false);
 
+  const [uploadedSounds, setUploadedSounds] = useState([]);
+
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const newSound = {
+          name: file.name,
+          data: e.target.result
+        };
+        setUploadedSounds([...uploadedSounds, newSound]);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle('dark-mode');
@@ -40,21 +57,27 @@ export function Preferences () {
         </div>
       </div>
 
-      
-
       <br></br>
-
+      
       <div className='row'>
         <div className='col-lg-offset-3' />
         <button 
-            onClick={toggleDarkMode} 
-            className="upload">
-            {darkMode ? 'Day Mode' : 'Night Mode'}
-          </button>
+          className="upload"
+          onClick={() => document.getElementById('fileUpload').click()} 
+        >
+          Upload
+        </button>
+        <input
+          id="fileUpload"
+          type="file"
+          accept="audio/*"
+          onChange={handleUpload}
+          style={{ display: 'none' }}
+        />
         <PlaybackControls />
       </div>
-
-      <SoundTable />
+      
+      <SoundTable uploadedSounds={uploadedSounds} />
     </React.Fragment>
   )
 }
