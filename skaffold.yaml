@@ -9,7 +9,6 @@ build:
     push: false
   artifacts:
     - image: shuweic227/client
-      context: client
       docker:
         dockerfile: Dockerfile
       sync:
