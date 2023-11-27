@@ -15,3 +15,9 @@ build:
         manual:
           - src: "src/**/*.*"
             dest: .
+portForward:
+  - resourceType: service
+    resourceName: client-srv
+    namespace: default  # Adjust if your service is in a different namespace
+    port: 5173
+    localPort: 5173  # The local port you want to forward to, can be the same or different
