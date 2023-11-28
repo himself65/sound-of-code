@@ -233,7 +233,7 @@ export const modMethodDefinition = (node, settings) => {
     settings,
     key.name,
   );
-  return `${kind === "constructor" ? "constructor" : ""} ${modifiedFunction}`;
+  return `${kind === "constructor" ? "constructor" : "async"} ${modifiedFunction}`;
 };
 
 /**
@@ -652,6 +652,12 @@ export const modReturnStatement = (node, settings) => {
   const { loc, argument } = node;
 
   const resultValue = modifyStatement(argument, { ...settings, silence: true });
+  if (resultValue.trim() === '') {
+    return `return await __debugger.noopCall('return', ${JSON.stringify(
+      { loc, settings },
+    )})`;
+  }
+
 
   return `return await __debugger.dynamicTypeCheck(await (${resultValue}), ${JSON.stringify(
     { loc, settings },
