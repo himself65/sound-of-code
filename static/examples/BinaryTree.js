@@ -2,7 +2,7 @@
 //This is a node class, they are the basic element make a tree.
 class Node {
     //this creates a new node with the parent, right child and left child is null.
-    constructor(value) {
+    Node(value) {
         this.value = value;
         this.parent = null;
         this.left = null;
@@ -12,7 +12,7 @@ class Node {
 
 //A binary search tree can be efficient to search
 class BSTree {
-    constructor() {
+    BSTree() {
         this.root = null;
     }
 
