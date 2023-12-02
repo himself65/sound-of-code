@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import '../firebaseConfig.js'; 
 
 import EditorContext from '../components/EditorContext'
 import SoundContext from '../components/SoundContext'
