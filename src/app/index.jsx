@@ -77,8 +77,13 @@ const Tutorial6 = lazy(() =>
 
 const Question = lazy(() =>
   import(
-    /* webpackChunkName: "resources", webpackPrefetch: true */ '../pages/question'
+    /* webpackChunkName: "question", webpackPrefetch: true */ '../pages/question'
+  )
+)
 
+const Feedback = lazy(() =>
+  import(
+    /* webpackChunkName: "feedback", webpackPrefetch: true */ '../pages/feedback'
   )
 )
 
@@ -134,6 +139,10 @@ const router = createBrowserRouter([
       {
         path: 'question',
         element: <Question/>,
+      },
+      {
+        path: 'feedback',
+        element: <Feedback/>
       }
     ]
   },
