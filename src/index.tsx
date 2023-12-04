@@ -1,3 +1,4 @@
+import "driver.js/dist/driver.css";
 import 'mini.css/dist/mini-default.css'
 import './styles/main.less'
 import React, { StrictMode } from 'react'

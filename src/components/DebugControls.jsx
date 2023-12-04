@@ -5,6 +5,7 @@ import Debugger from '../debugger/Debugger'
 import EditorContext from './EditorContext'
 import { MdLoop, MdPlayArrow, MdPause, MdStop } from './Icons'
 import SoundContext from './SoundContext'
+import { driver } from 'driver.js'
 
 export function DebugControls () {
   /** @type {[Debugger, React.Dispatch<Debugger>]} */
@@ -13,6 +14,52 @@ export function DebugControls () {
   const sound = useContext(SoundContext)
   // @ts-expect-error
   const { isExecuting, status } = useSelector(state => state.program)
+
+  const playTour = useCallback(() => {
+    const driverObj = driver({
+      showProgress: true,
+      showButtons: ['next', 'previous'],
+      steps: [
+        {
+          element: '#main-button',
+          popover: {
+            title: 'Play',
+            description: 'Click this button to start playing your program.',
+            side: "left",
+            align: 'start'
+          }
+        },
+        {
+          element: '#stop-button',
+          popover: {
+            title: 'Stop',
+            description: 'Click this button to stop playing your program.',
+            side: "left",
+            align: 'start'
+          }
+        },
+        {
+          element: '#start-button',
+          popover: {
+            title: 'Set Start Point',
+            description: 'Click this button to set the start point of your program.',
+            side: "left",
+            align: 'start'
+          }
+        },
+        {
+          element: '#reset-button',
+          popover: {
+            title: 'Reset Start Point',
+            description: 'Click this button to reset the start point of your program.',
+            side: "left",
+            align: 'start'
+          }
+        }
+      ]
+    });
+    driverObj.drive();
+  }, [])
 
   const handleStop = useCallback(() => {
     if (debug) {
@@ -61,17 +108,18 @@ export function DebugControls () {
       </span>
 
       <section className='button-group'>
-        <MainButton debug={debug} />
+        <MainButton id="main-button" debug={debug} />
 
-        <button onClick={handleStop}>
+        <button onClick={handleStop} id="stop-button" disabled={!isExecuting}>
           Stop <MdStop />
         </button>
 
-        <button onClick={handleStartPoint} disabled={isExecuting}>
+        <button onClick={handleStartPoint} disabled={isExecuting} id="start-button">
           Set Start Point
         </button>
 
-        <button onClick={handleResestPoint}>Reset Start Point</button>
+        <button onClick={handleResestPoint} id="reset-button">Reset Start Point</button>
+        <button onClick={playTour} id="tour-button">Tour</button>
       </section>
     </div>
   )
@@ -80,6 +128,7 @@ export function DebugControls () {
 /**
  * @param {object} props
  * @param {Debugger} props.debug
+ * @param {string | undefined} props.id
  */
 export function MainButton (props) {
   const { debug } = props
@@ -110,14 +159,14 @@ export function MainButton (props) {
     switch (weaverStatus) {
       case 'parsing':
         return (
-          <button className='primary' disabled>
+          <button className='primary' id={props.id} disabled>
             Parsing <MdLoop />
           </button>
         )
 
       default:
         return (
-          <button className='primary' onClick={handleStart}>
+          <button className='primary' id={props.id} onClick={handleStart}>
             Play <MdPlayArrow />
           </button>
         )
@@ -126,14 +175,14 @@ export function MainButton (props) {
     switch (status) {
       case 'playing':
         return (
-          <button className='primary' onClick={handlePause}>
+          <button className='primary' id={props.id} onClick={handlePause}>
             Pause <MdPause />
           </button>
         )
 
       case 'paused':
         return (
-          <button className='primary' onClick={handleResume}>
+          <button className='primary' id={props.id} onClick={handleResume}>
             Resume <MdPlayArrow />
           </button>
         )
