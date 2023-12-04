@@ -1,7 +1,6 @@
 import { sound as soundActions } from "../actions";
 import { soundMap } from "./soundmap";
 import { store } from "../store";
-import { getUrl } from "../utils";
 
 /** Manages Howler sound instances */
 export class SoundManager {
@@ -257,7 +256,7 @@ export const createTrack = async (sound, loop = false) => {
   console.log(file);
 
   const track = new Howl({
-    src: [getUrl(`./sounds/${file}`)],
+    src: [`/sounds/${file}`],
     loop,
     rate,
     volume: volume / 100,

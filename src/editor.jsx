@@ -3,7 +3,7 @@ import {
   resetStartpoint as resetStart
 } from './actions/program'
 import { store } from './store'
-import { load, save, getUrl } from './utils'
+import { load, save } from './utils'
 
 /**
  * Abstracted Editor Instance
@@ -121,9 +121,9 @@ export class Editor {
 
     const {
       default: { get }
-    } = await import(/* webpackChunkName: "axios" */ 'axios')
+    } = await import('axios')
 
-    const { data } = await get(getUrl(`./examples/${exampleProgram}`))
+    const { data } = await get(`/examples/${exampleProgram}`)
 
     this.setValue(data)
   }

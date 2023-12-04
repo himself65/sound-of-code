@@ -1,5 +1,4 @@
 import { Link, Outlet } from 'react-router-dom'
-import { getUrl } from '../utils'
 import React from 'react'
 
 export const Dashboard = () => {
@@ -7,28 +6,28 @@ export const Dashboard = () => {
     <>
       <header>
         <div className="col-sm col-md-10 col-md-offset-1">
-          <Link role="button" to={getUrl('./')}>
+          <Link role="button" to={'/'}>
             Home
           </Link>
-          <Link role="button" to={getUrl('./sonify')}>
+          <Link role="button" to={'/sonify'}>
             Sonify Console
           </Link>
-          <Link role="button" to={getUrl('./preferences')}>
+          <Link role="button" to={'/preferences'}>
             Preferences
           </Link>
-          <Link role="button" to={getUrl('./about')}>
+          <Link role="button" to={'/about'}>
             About
           </Link>
-          <Link role="button" to={getUrl('./tutorial')}>
+          <Link role="button" to={'/tutorial'}>
             Tutorial
           </Link>
-          <Link role="button" to={getUrl('./resources')}>
+          <Link role="button" to={'/resources'}>
             Resources
           </Link>
-          <Link role="button" to={getUrl('./question')}>
+          <Link role="button" to={'/question'}>
             Question
           </Link>
-          <Link role="button" to={getUrl('./feedback')}>
+          <Link role="button" to={'/feedback'}>
             Feedback
           </Link>
         </div>

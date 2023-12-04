@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Link, Outlet } from 'react-router-dom'
-import { getUrl } from '../../utils'
+import { Link } from 'react-router-dom'
+
 export function Tutorial5 () {
   return (
     <React.Fragment>
@@ -11,16 +11,16 @@ export function Tutorial5 () {
             <p>5. Get error feedback and be able to fix it.</p>
         </div>
       <div className="slide">
-        <img src={getUrl('./img/tutorial/5.gif')}
+        <img src={'/img/tutorial/5.gif'}
             alt='Pressed play button. Virtual console shows syntax error.'/>
     </div>
 
 
       <div className="buttons">
-          <Link role="button" to={getUrl('./tutorial4')} className="buttoncolor">
+          <Link role="button" to={'/tutorial4'} className="buttoncolor">
             Prev
           </Link>
-          <Link role="button" to={getUrl('./tutorial6')} className="buttoncolor">
+          <Link role="button" to={'/tutorial6'} className="buttoncolor">
             Next
           </Link>
       </div>

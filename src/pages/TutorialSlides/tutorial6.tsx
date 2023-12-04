@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Link, Outlet } from 'react-router-dom'
-import { getUrl } from '../../utils'
+import { Link } from 'react-router-dom'
 export function Tutorial6 () {
   return (
     <React.Fragment>
@@ -13,16 +12,16 @@ export function Tutorial6 () {
             you're done debugging.</p>
         </div>
       <div className="slide">
-        <img src={getUrl('./img/tutorial/6.gif')}
+        <img src={'/img/tutorial/6.gif'}
             alt='Set the breakpoint to debug. Clear it out when done.'/>
     </div>
 
 
       <div className="buttons">
-          <Link role="button" to={getUrl('./tutorial5')} className="buttoncolor">
+          <Link role="button" to={'/tutorial5'} className="buttoncolor">
             Prev
           </Link>
-          <Link role="button" to={getUrl('./tutorial')} className="buttoncolor">
+          <Link role="button" to={'/tutorial'} className="buttoncolor">
             Next
           </Link>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Link, Outlet } from 'react-router-dom'
-import { getUrl } from '../../utils'
+import { Link } from 'react-router-dom'
+
 export function Tutorial2 () {
   return (
     <React.Fragment>
@@ -13,15 +13,15 @@ export function Tutorial2 () {
             click 'Load' to reload them back at anytime.</p>
         </div>
       <div className="slide">
-        <img src={getUrl('./img/tutorial/2.gif')}
+        <img src={'/img/tutorial/2.gif'}
             alt='Pressing save button. Refreshing page. Pressing load button.'/>
     </div>
 
       <div className="buttons">
-          <Link role="button" to={getUrl('./tutorial')} className="buttoncolor">
+          <Link role="button" to={'/tutorial'} className="buttoncolor">
             Prev
           </Link>
-          <Link role="button" to={getUrl('./tutorial3')} className="buttoncolor">
+          <Link role="button" to={'/tutorial3'} className="buttoncolor">
             Next
           </Link>
       </div>

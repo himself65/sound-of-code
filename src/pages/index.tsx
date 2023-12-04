@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Helmet } from 'react-helmet'
-import { Link, Outlet } from 'react-router-dom'
-import { getUrl } from '../utils'
+import { Link } from 'react-router-dom'
 import "../styles/main.less"
 
-export function Home () {
+export function Home (): ReactElement {
   return (
     <React.Fragment>
       <Helmet title='Sound of Code' />
@@ -51,7 +50,7 @@ export function Home () {
       </div>
 
       <div className='buttons'>
-        <Link role="button" to={getUrl('./sonify')} className="button_color_green">
+        <Link role="button" to={'/sonify'} className="button_color_green">
             Get started now!
           </Link>
       </div>

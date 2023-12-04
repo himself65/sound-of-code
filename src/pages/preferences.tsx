@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { Helmet } from 'react-helmet'
 
 import PlaybackControls from '../components/PlaybackControls'
@@ -6,7 +6,7 @@ import SoundTable from '../components/SoundTable'
 import '../styles/main.less';
 import '../styles/preferences.less';
 
-export function Preferences () {
+export function Preferences (): ReactElement {
   const [darkMode, setDarkMode] = useState(false);
 
   const [uploadedSounds, setUploadedSounds] = useState([]);
@@ -38,8 +38,8 @@ export function Preferences () {
       <div className='row'>
         <h1 className='col-md-offset-1 col-md-10'>
           Preferences
-          <button 
-            onClick={toggleDarkMode} 
+          <button
+            onClick={toggleDarkMode}
             className="dark-mode-toggle">
             {darkMode ? 'Day Mode' : 'Night Mode'}
           </button>
@@ -58,12 +58,12 @@ export function Preferences () {
       </div>
 
       <br></br>
-      
+
       <div className='row'>
         <div className='col-lg-offset-3' />
-        <button 
+        <button
           className="upload"
-          onClick={() => document.getElementById('fileUpload').click()} 
+          onClick={() => document.getElementById('fileUpload').click()}
         >
           Upload
         </button>
@@ -76,7 +76,7 @@ export function Preferences () {
         />
         <PlaybackControls />
       </div>
-      
+
       <SoundTable uploadedSounds={uploadedSounds} />
     </React.Fragment>
   )

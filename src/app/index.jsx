@@ -3,8 +3,8 @@ import { Helmet } from 'react-helmet'
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom";
-import '../firebaseConfig.js'; 
+} from 'react-router-dom'
+import '../firebaseConfig.js'
 
 import EditorContext from '../components/EditorContext'
 import SoundContext from '../components/SoundContext'
@@ -12,80 +12,54 @@ import Editor from '../editor'
 import SoundManager from '../sound/SoundManager'
 import { Dashboard } from '../pages/dashboard'
 
-const Home = lazy(() =>
-  import(/* webpackChunkName: "home", webpackPrefetch: true */ '../pages')
-)
+const Home = lazy(() => import('../pages'))
 
 const Sonify = lazy(() =>
-  import(
-    /* webpackChunkName: "sonify", webpackPrefetch: true */ '../pages/sonify'
-  )
+  import('../pages/sonify')
 )
 
 const Preferences = lazy(() =>
-  import(
-    /* webpackChunkName: "preferences", webpackPrefetch: true */ '../pages/preferences'
-  )
+  import('../pages/preferences')
 )
 
 const About = lazy(() =>
-  import(
-    /* webpackChunkName: "about", webpackPrefetch: true */ '../pages/about'
-  )
+  import('../pages/about')
 )
 
 const Resources = lazy(() =>
-  import(
-    /* webpackChunkName: "resources", webpackPrefetch: true */ '../pages/resources'
-  )
+  import('../pages/resources')
 )
 
 const Tutorial = lazy(() =>
-    import(
-      /* webpackChunkName: "tutorial", webpackPrefetch: true */ '../pages/tutorial'
-    )
+  import('../pages/tutorial')
 )
 
 const Tutorial2 = lazy(() =>
-  import (
-    /* webpackChunkName: "tutorial2", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial2'
-  )
+  import ('../pages/TutorialSlides/tutorial2')
 )
 
 const Tutorial3 = lazy(() =>
-  import (
-    /* webpackChunkName: "tutorial3", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial3'
-  )
+  import ('../pages/TutorialSlides/tutorial3')
 )
 
 const Tutorial4 = lazy(() =>
-  import (
-    /* webpackChunkName: "tutorial4", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial4'
-  )
+  import ('../pages/TutorialSlides/tutorial4')
 )
 
 const Tutorial5 = lazy(() =>
-  import (
-    /* webpackChunkName: "tutorial5", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial5'
-  )
+  import ('../pages/TutorialSlides/tutorial5')
 )
 
 const Tutorial6 = lazy(() =>
-  import (
-    /* webpackChunkName: "tutorial6", webpackPrefetch: true */ '../pages/TutorialSlides/tutorial6'
-  )
+  import ('../pages/TutorialSlides/tutorial6')
 )
 
 const Question = lazy(() =>
-  import(
-    /* webpackChunkName: "question", webpackPrefetch: true */ '../pages/question'
-  )
+  import('../pages/question')
 )
 
 const Feedback = lazy(() =>
-  import(
-    /* webpackChunkName: "feedback", webpackPrefetch: true */ '../pages/feedback'
-  )
+  import('../pages/feedback')
 )
 
 const router = createBrowserRouter([
@@ -95,58 +69,58 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home/>,
+        element: <Home/>
       },
       {
         path: 'sonify',
-        element: <Sonify/>,
+        element: <Sonify/>
       },
       {
         path: 'preferences',
-        element: <Preferences/>,
+        element: <Preferences/>
       },
       {
         path: 'about',
-        element: <About/>,
+        element: <About/>
       },
       {
         path: 'resources',
-        element: <Resources/>,
+        element: <Resources/>
       },
       {
         path: 'tutorial',
-        element: <Tutorial/>,
+        element: <Tutorial/>
       },
       {
         path: 'tutorial2',
-        element: <Tutorial2/>,
+        element: <Tutorial2/>
       },
       {
         path: 'tutorial3',
-        element: <Tutorial3/>,
+        element: <Tutorial3/>
       },
       {
         path: 'tutorial4',
-        element: <Tutorial4/>,
+        element: <Tutorial4/>
       },
       {
         path: 'tutorial5',
-        element: <Tutorial5/>,
+        element: <Tutorial5/>
       },
       {
         path: 'tutorial6',
-        element: <Tutorial6/>,
+        element: <Tutorial6/>
       },
       {
         path: 'question',
-        element: <Question/>,
+        element: <Question/>
       },
       {
         path: 'feedback',
         element: <Feedback/>
       }
     ]
-  },
+  }
 ])
 
 export function App () {
@@ -169,27 +143,27 @@ export function App () {
   return (
     <SoundContext.Provider value={sound}>
       <EditorContext.Provider value={editor}>
-        <Helmet defaultTitle='Sound of Code'>
+        <Helmet defaultTitle="Sound of Code">
           <meta
-            name='description'
-            content='The sound of code is an interactive JavaScript environment for
+            name="description"
+            content="The sound of code is an interactive JavaScript environment for
                 learning (and hearing) JavaScript. We leverage state of the art
                 sonification techniques to augment your code. You simply write
                 JavaScript (or load from a file) and our system annotates it
                 with sounds. You will be able to hear the difference between
                 different data types and structures as well as hear both syntax
-                and runtime errors.'
+                and runtime errors."
           />
         </Helmet>
 
-        <main className='container'>
+        <main className="container">
           <Suspense fallback={<p>Loading...</p>}>
             <RouterProvider router={router}/>
           </Suspense>
         </main>
 
         <footer>
-          <div className='col-sm col-md-10 col-md-offset-1'>
+          <div className="col-sm col-md-10 col-md-offset-1">
             <p>Sound of Code, UNL 2017-2018, ISU 2023</p>
           </div>
         </footer>

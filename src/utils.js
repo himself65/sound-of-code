@@ -19,15 +19,6 @@ export const download = (filename, text) => {
 };
 
 /**
- * Get the absolute URL that stays consistent in any page
- * @param {string} url URL relative to domain
- * @returns {string} absolute URL
- */
-export const getUrl = (url) => {
-  return "/" + url;
-};
-
-/**
  * @param {string} id
  * @param {any} backupValue
  */

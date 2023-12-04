@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Helmet } from 'react-helmet'
 
-import { getUrl } from '../utils'
-
-export function About () {
+export function About (): ReactElement {
   return (
     <React.Fragment>
       <Helmet title='About | Sound of Code' />
@@ -34,9 +32,9 @@ export function About () {
             </p>
 
             <p>
-              In 2023 the project was taken over by an Iowa State Senior design 
+              In 2023 the project was taken over by an Iowa State Senior design
               team to update the application and add new features. Working with
-              what the original developrs had created, they were able to improve 
+              what the original developrs had created, they were able to improve
               the Sound of Code and help more people gain access to it locally.
             </p>
           </div>

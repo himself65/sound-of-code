@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Helmet } from 'react-helmet'
 
 import Console from '../components/Console'
@@ -9,7 +9,7 @@ import Input from '../components/Input'
 import PlaybackControls from '../components/PlaybackControls'
 import ScopeMap from '../components/ScopeMap'
 
-export function Sonify () {
+export function Sonify (): ReactElement {
   return (
     <React.Fragment>
       <Helmet title='Sonify | Sound of Code' />

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react'
 import { Helmet } from 'react-helmet';
 import '../styles/feedback.less';
 import { getDatabase, ref, onValue, push } from 'firebase/database';
 
-export default function Feedback() {
+export default function Feedback(): ReactElement {
   const MAX_LENGTH = 300;
   const MAX_NICKNAME_LENGTH = 20;
   const [feedback, setFeedback] = useState("");
@@ -43,7 +43,7 @@ export default function Feedback() {
       const database = getDatabase();
       const feedbackRef = ref(database, 'feedback');
       const newFeedback = {
-        nickname: nickname.trim(), 
+        nickname: nickname.trim(),
         content: feedback.trim(),
         timestamp: new Date().toISOString()
       };
