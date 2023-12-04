@@ -45,7 +45,7 @@ const defaultSoundTypeState: SoundTypeState = {
   TypeChange: { volume: 100 },
 };
 
-const defaultSoundState: SoundState = {
+export const defaultSoundState: SoundState = {
   speed: 1,
   theme: "default",
   volume: 100,

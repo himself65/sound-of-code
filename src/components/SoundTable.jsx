@@ -6,13 +6,9 @@ import SoundContext from './SoundContext'
 import Volume from './Volume'
 
 export function SoundTable ({ uploadedSounds = [] }) {
+  // @ts-expect-error
   const types = useSelector(state => state.sound.types)
   const sound = useContext(SoundContext)
-
-  const playUploadedSound = (uploadedSound) => {
-    const audio = new Audio(uploadedSound.data);
-    audio.play();
-  };
 
   useEffect(
     () => () => {
@@ -22,7 +18,7 @@ export function SoundTable ({ uploadedSounds = [] }) {
     },
     [sound]
   )
-  
+
 
   return (
     <React.Fragment>
@@ -32,20 +28,21 @@ export function SoundTable ({ uploadedSounds = [] }) {
 
       {Object.keys(soundMap).map(
         /**
-         * @param {DataType | StructureType | DebugType} type
+         * @param {import('../type').DataType | import('../type').StructureType | import('../type').DebugType} type
          */
         (type, index) => (
           <SoundEntry key={index} type={type} volume={types[type].volume} />
         )
       )}
       {Object.keys(soundMap).map((type, index) => (
+        // @ts-expect-error
       <SoundEntry key={index} type={type} volume={types[type].volume} />
     ))}
 
     <div className='row'>
       <h4 className='col-md-offset-1 col-md-10'>Uploaded Sounds</h4>
     </div>
-    
+
     {uploadedSounds.map((sound, index) => (
       <UploadedSoundEntry key={index} uploadsound={sound} />
     ))}
@@ -56,7 +53,7 @@ export function SoundTable ({ uploadedSounds = [] }) {
 
 /**
  * @param {object} props
- * @param {DataType | StructureType | DebugType} props.type
+ * @param {import('../type').DataType | import('../type').StructureType | import('../type').DebugType} props.type
  * @param {number} props.volume
  */
 export function SoundEntry (props) {

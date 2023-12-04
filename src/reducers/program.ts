@@ -19,7 +19,7 @@ export type ProgramState = {
   weaverStatus: "parsing" | "success" | "error" | null;
 };
 
-const defaultProgramState: ProgramState = {
+export const defaultProgramState: ProgramState = {
   startLocation: -1,
   exitStatus: null,
   isExecuting: false,

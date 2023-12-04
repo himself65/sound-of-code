@@ -7,6 +7,7 @@ import Volume from './Volume'
 import SoundContext from './SoundContext'
 
 export function PlaybackControls () {
+  // @ts-expect-error
   const { speed, theme, volume } = useSelector(state => state.sound)
 
   const sound = useContext(SoundContext)

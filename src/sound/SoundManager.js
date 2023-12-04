@@ -46,7 +46,7 @@ export class SoundManager {
   }
 
   /**
-   * @param {Howl} track
+   * @param {Howl | undefined} track
    * @param {import("../type").DataType | import("../type").StructureType | import("../type").DebugType} type
    * @param {boolean?} checkCurrent
    */
@@ -117,12 +117,12 @@ export class SoundManager {
         return;
       } else {
         // Deactivate the for track
-        this.forTrack.stop();
+        this.forTrack?.stop();
       }
     } else {
       if (currentDepth > 0) {
         // Activate the for track
-        this.forTrack.play();
+        this.forTrack?.play();
       }
     }
 
@@ -142,12 +142,12 @@ export class SoundManager {
         return;
       } else {
         // Deactivate the while track
-        this.whileTrack.stop();
+        this.whileTrack?.stop();
       }
     } else {
       if (currentDepth > 0) {
         // Activate the while track
-        this.whileTrack.play();
+        this.whileTrack?.play();
       }
     }
 
@@ -183,12 +183,12 @@ export class SoundManager {
 
   /** Resumes all loops */
   resumeLoops() {
-    if (this.whileDepth > 0 && !this.whileTrack.playing()) {
-      this.whileTrack.play();
+    if (this.whileDepth > 0 && !this.whileTrack?.playing()) {
+      this.whileTrack?.play();
     }
 
-    if (this.forDepth > 0 && !this.forTrack.playing()) {
-      this.forTrack.play();
+    if (this.forDepth > 0 && !this.forTrack?.playing()) {
+      this.forTrack?.play();
     }
   }
 
@@ -206,19 +206,19 @@ export class SoundManager {
     return this.setValueType(type).then(
       () =>
         new Promise((resolve, reject) => {
-          this.statementTrack.once("end", resolve);
-          this.statementTrack.once("pause", resolve);
-          this.statementTrack.once("stop", resolve);
+          this.statementTrack?.once("end", resolve);
+          this.statementTrack?.once("pause", resolve);
+          this.statementTrack?.once("stop", resolve);
 
-          this.statementTrack.once("loaderror", () =>
+          this.statementTrack?.once("loaderror", () =>
             reject(Error("Could not load sound file")),
           );
-          this.statementTrack.once("playerror", () =>
+          this.statementTrack?.once("playerror", () =>
             reject(Error("Could not play sound file")),
           );
 
           // play the sound type here
-          this.statementTrack.play();
+          this.statementTrack?.play();
         }),
     );
   }
@@ -267,7 +267,7 @@ export const createTrack = async (sound, loop = false) => {
 
 /**
  * Set the speed on multiple tracks
- * @param {Array<Howl>} tracklist
+ * @param {Array<Howl | undefined>} tracklist
  */
 export const setMultipleSpeed = (tracklist = []) => {
   const {

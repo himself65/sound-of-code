@@ -11,6 +11,7 @@ export function DebugControls () {
   const [debug, setDebug] = useState(null)
   const editor = useContext(EditorContext)
   const sound = useContext(SoundContext)
+  // @ts-expect-error
   const { isExecuting, status } = useSelector(state => state.program)
 
   const handleStop = useCallback(() => {
@@ -83,6 +84,7 @@ export function DebugControls () {
 export function MainButton (props) {
   const { debug } = props
   const { isExecuting, status, weaverStatus } = useSelector(
+    // @ts-expect-error
     state => state.program
   )
 

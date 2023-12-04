@@ -1,8 +1,4 @@
-/**
- * @param {string} filename
- * @param {string} text
- */
-export const download = (filename, text) => {
+export const download = (filename: string, text: string) => {
   const element = document.createElement("a");
   element.setAttribute(
     "href",
@@ -18,11 +14,7 @@ export const download = (filename, text) => {
   document.body.removeChild(element);
 };
 
-/**
- * @param {string} id
- * @param {any} backupValue
- */
-export const load = async (id, backupValue = null) => {
+export const load = <T>(id: string, backupValue: T | null = null) => {
   if (typeof Storage === "undefined") {
     throw Error("Storage API not supported");
   }
@@ -36,16 +28,12 @@ export const load = async (id, backupValue = null) => {
   }
 };
 
-/**
- * @param {string} id
- * @param {any} item
- */
-export const save = async (id, item) => {
+export const save = (id: string, item: string) => {
   if (typeof Storage === "undefined") {
     throw Error("Storage API not supported");
   }
 
-  window.localStorage.setItem(id, JSON.stringify(item));
+  window.localStorage.setItem(id, item);
 };
 
 /**

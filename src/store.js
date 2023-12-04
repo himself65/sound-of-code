@@ -9,6 +9,6 @@ import * as Reducers from "./reducers";
 /**
  * @returns {AppStore}
  */
-export const createStore = () => Redux.createStore(Reducers.app);
+export const createStore = () => Redux.createStore(Reducers.appReducer);
 
 export const store = createStore();

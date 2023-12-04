@@ -19,7 +19,7 @@ export type AppState = {
 
 type AppReducer = Redux.Reducer<AppState>;
 
-export const app: AppReducer = Redux.combineReducers({
+export const appReducer: AppReducer = Redux.combineReducers({
   console: ConsoleReducer.console,
   program: ProgramReducer.program,
   sound: SoundReducer.sound,
