@@ -20,10 +20,11 @@ Ensure that all dependencies are installed. (Just run `npm install`. No packages
 
 All defined in the `scripts` section of `package.json`
 
-- `npm run build` - Builds a production version. Specifically for publishing purposes.
-- `npm run dev` - Builds development version and watches files for changes. For development use only!
+- `npm run build` - Builds production. Specifically for publishing purposes.
+- `npm run dev` - Builds development and watches files for changes. For development use only!
 - `npm run lint` - Lints source code for Standard Style formatting
 - `npm test` - Runs unit tests
+- `npm run e2e` - Runs end-to-end tests
 
 Resources, API descriptions, and other documents related to packages in use are linked in [`docs/package-resources.md`](docs/package-resources.md).
 
@@ -35,11 +36,5 @@ For more information about the development environment, please refer to [`docs/d
 - `src` - Contains the source code for the application
 - `static` - Contains assets used on the site
 - `test` - Contains all unit tests to run
-
-## Workflow Description
-
-The `master` branch will hold the stable release.
-
-The `develop` branch will hold the current release in progress. Additional branches must branch from and merge into the `develop` branch.
-
-_Note_: Use the command `git checkout -b <new-branch-name>` to do both `branch` and `checkout` commands. (This avoids accidental pushes to the `master` or `develop` branches.)
+- `e2e` - Contains all end-to-end tests to run
+- `infra` - Contains infrastructure code for deployment
